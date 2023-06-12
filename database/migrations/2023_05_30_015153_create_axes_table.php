@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('axes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('description');
         });
         DB::table('roles')->insert([
             ['name' => 'Eixo 1'],
