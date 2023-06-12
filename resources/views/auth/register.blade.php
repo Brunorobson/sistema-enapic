@@ -60,8 +60,8 @@
                             @endif
 
                             <div class="flex items-center justify-end mt-4">
-                                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                                    {{ __('Already registered?') }}
+                                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('filament.auth.login') }}">
+                                    {{ __('Já registrado?') }}
                                 </a>
 
                                 <x-button class="ml-4">
