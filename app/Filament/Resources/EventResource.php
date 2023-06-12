@@ -6,10 +6,17 @@ use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -17,19 +24,33 @@ class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
 
+    protected static ?string $modelLabel = 'Evento';
+    protected static ?string $pluralModelLabel = 'Eventos';
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('active')
-                    ->required(),
+
+                Grid::make()->schema([
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255)
+                        ->label('Nome')
+                        ->columnSpan(2),
+                    Toggle::make('active')
+                        ->required()
+                        ->label('Ativo?'),
+                    RichEditor::make('description')
+                        ->maxLength(255)
+                        ->columnSpan(3)
+                        ->label('Descrição'),
+
+                ])->columns(3)
+
             ]);
     }
 
@@ -37,33 +58,30 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\IconColumn::make('active')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                TextColumn::make('name')->sortable()->searchable()->label('NOME'),
+                //TextColumn::make('description')->limit(36)->sortable()->searchable()->label('DESCRIÇÃO'),
+                TextColumn::make('created_at')->dateTime('d/m/y h:i')->sortable()->searchable()->label('CADASTRO'),
+                IconColumn::make('active')->boolean()->label('ATIVO'),
             ])
             ->filters([
-                //
+                TernaryFilter::make('active')->label('Ativo?')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                //Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -71,5 +89,5 @@ class EventResource extends Resource
             'create' => Pages\CreateEvent::route('/create'),
             'edit' => Pages\EditEvent::route('/{record}/edit'),
         ];
-    }    
+    }
 }

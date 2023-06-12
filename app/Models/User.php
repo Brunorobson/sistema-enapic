@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -20,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use TwoFactorAuthenticatable;
 
     public const SUPPORT = 1;
+    public const ADMIN = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -72,6 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function makeInscription(int $user_id, int $event_id)
     {
         Inscription::create([
+            'uuid' => Str::uuid(),
             'user_id' => $user_id,
             'event_id' => $event_id
         ]);
@@ -97,6 +101,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->roles()->get()->contains(User::SUPPORT);
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->roles()->get()->contains(User::ADMIN);
+    }
+
 
     public function hasPermissionTo(string $permission): bool
     {

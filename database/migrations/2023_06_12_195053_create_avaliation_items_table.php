@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Event;
-use App\Models\User;
+use App\Models\Avaliation;
+use App\Models\Criteria;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inscriptions', function (Blueprint $table) {
+        Schema::create('avaliation_items', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->foreignIdFor(model:User::class);
-            $table->foreignIdFor(model:Event::class);
-            $table->char('status')->default('P'); //'Pendente', 'Ativa', 'Cancelada'
+            $table->foreignIdFor(model:Avaliation::class);
+            $table->foreignIdFor(model:Criteria::class);
+            $table->integer('value');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inscriptions');
+        Schema::dropIfExists('avaliation_items');
     }
 };

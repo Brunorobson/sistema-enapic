@@ -16,12 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('description');
+            $table->timestamps();
         });
-        DB::table('roles')->insert([
-            ['name' => 'Eixo 1'],
-            ['name' => 'Eixo 2'],
-            ['name' => 'Eixo 3']
-        ]);
+
     }
 
     /**

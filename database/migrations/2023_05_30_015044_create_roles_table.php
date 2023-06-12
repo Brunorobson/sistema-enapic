@@ -19,17 +19,13 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->timestamps();
         });
+
         Schema::create('role_user', function (Blueprint $table) {
-            $table->foreignIdFor(Role::class);
-            $table->foreignIdFor(User::class);
+            $table->id();
+            $table->foreignIdFor(model:Role::class)->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(model:User::class)->cascadeOnUpdate()->cascadeOnDelete();
+            $table->timestamps();
         });
-        DB::table('roles')->insert([
-            ['name' => 'Suporte'],
-            ['name' => 'Administrador'],
-            ['name' => 'Avaliador'],
-            ['name' => 'Pesquisador'],
-            ['name' => 'Ouvinte'],
-        ]);
     }
 
     /**
@@ -37,6 +33,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('role_user');
         Schema::dropIfExists('roles');
     }
 };

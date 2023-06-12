@@ -18,9 +18,9 @@ class UserSeeder extends Seeder
         User::insert([
             [
                 'id' => 1,
-                'name' => 'Marcos David',
-                'cpf' => '01726703304',
-                'email' => 'marcos@appmake.com.br',
+                'name' => 'Suporte',
+                'cpf' => '00000000000',
+                'email' => 'suporte@enapic.com.br',
                 'email_verified_at' => now(),
                 'password' => bcrypt('12345678'), // password
                 'remember_token' => Str::random(10)

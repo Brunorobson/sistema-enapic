@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Axe;
+use App\Models\Axis;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\Submission;
@@ -19,18 +19,12 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
-            $table->foreignIdFor(Axe::class);
+            $table->foreignIdFor(Axis::class);
             $table->string('title');
-            $table->text('description');
-            $table->char('status');
-            $table->string('file_upload');
-            $table->string('path_file');
-            $table->timestamps();
-        });
-
-        Schema::create('user_submissions', function (Blueprint $table) {
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Submission::class);
+            $table->text('resume');
+            $table->char('status')->default('P'); //'Pendente', 'Aprovada', 'Reprovada'
+            $table->string('file');
+            $table->string('file_path');
             $table->timestamps();
         });
     }

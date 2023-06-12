@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inscription extends Model
+class Avaliation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'uuid',
         'user_id',
-        'event_id',
-        'status'
+        'submission_id',
+        'total'
     ];
 
     public function user()
@@ -23,16 +22,11 @@ class Inscription extends Model
 
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Submission::class);
     }
 
-    public static function getStatus($state){
-        $array = array(
-            "P" => "Pendente",
-            "A" => "Aprovada",
-            "R" => "Reprovada"
-        );
-        return $array[$state];
+    public function avaliationItems()
+    {
+        return $this->hasMany(AvaliationItem::class);
     }
-
 }

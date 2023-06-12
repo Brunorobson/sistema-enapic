@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\InscriptionResource\Pages;
+namespace App\Filament\Resources\CriteriaResource\Pages;
 
-use App\Filament\Resources\InscriptionResource;
+use App\Filament\Resources\CriteriaResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditInscription extends EditRecord
+class EditCriteria extends EditRecord
 {
-    protected static string $resource = InscriptionResource::class;
+    protected static string $resource = CriteriaResource::class;
 
     protected function getActions(): array
     {

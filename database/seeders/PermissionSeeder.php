@@ -14,129 +14,48 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         DB::table('permissions')->insert([
-            'id' => 1,
-            'name' => 'Ler Usuários',
-            'guard_name' => 'read_users',
-        ]);
-        DB::table('permissions')->insert([
-            'id' => 2,
-            'name' => 'Escrever Usuários',
-            'guard_name' => 'write_users',
-        ]);
-
-        DB::table('permissions')->insert([
-            'id' => 3,
-            'name' => 'Ler Inscrições',
-            'guard_name' => 'read_inscriptions',
-        ]);
-        DB::table('permissions')->insert([
-            'id' => 4,
-            'name' => 'Escrever Inscrições',
-            'guard_name' => 'write_inscriptions',
-        ]);
-
-        DB::table('permissions')->insert([
-            'id' => 5,
-            'name' => 'Ler Submissões',
-            'guard_name' => 'read_submissions',
-        ]);
-        DB::table('permissions')->insert([
-            'id' => 6,
-            'name' => 'Escrever Submissões',
-            'guard_name' => 'write_submissions',
-        ]);
-
-        DB::table('permissions')->insert([
-            'id' => 7,
-            'name' => 'Ler Avaliações',
-            'guard_name' => 'read_avaliantions',
-        ]);
-        DB::table('permissions')->insert([
-            'id' => 8,
-            'name' => 'Escrever Avaliações',
-            'guard_name' => 'write_avaliantions',
+            ['id' => 1, 'name' => 'Ler Usuários', 'guard_name' => 'read_users'],
+            ['id' => 2, 'name' => 'Escrever Usuários', 'guard_name' => 'write_users'],
+            ['id' => 3, 'name' => 'Ler Inscrições', 'guard_name' => 'read_inscriptions'],
+            ['id' => 4, 'name' => 'Escrever Inscrições', 'guard_name' => 'write_inscriptions'],
+            ['id' => 5, 'name' => 'Ler Submissões', 'guard_name' => 'read_submissions'],
+            ['id' => 6, 'name' => 'Escrever Submissões', 'guard_name' => 'write_submissions'],
+            ['id' => 7, 'name' => 'Ler Avaliações', 'guard_name' => 'read_avaliantions'],
+            ['id' => 8, 'name' => 'Escrever Avaliações', 'guard_name' => 'write_avaliantions'],
         ]);
 
         //permission_role
         //Administrador = 2
         DB::table('permission_role')->insert([
-            'permission_id' => 1,
-            'role_id' => 2,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 2,
-            'role_id' => 2,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 3, //Ler Inscrições
-            'role_id' => 2,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 4,
-            'role_id' => 2,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 5,
-            'role_id' => 2,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 7,
-            'role_id' => 2,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 8,
-            'role_id' => 2,
+            ['permission_id' => 1, 'role_id' => 2],
+            ['permission_id' => 3, 'role_id' => 2], //Ler Inscrições
+            ['permission_id' => 4, 'role_id' => 2],
+            ['permission_id' => 5, 'role_id' => 2],
+            ['permission_id' => 6, 'role_id' => 2],
+            ['permission_id' => 7, 'role_id' => 2],
+            ['permission_id' => 8, 'role_id' => 2],
         ]);
 
         //Avaliador = 3
         DB::table('permission_role')->insert([
-            'permission_id' => 5, //Ler Submissões
-            'role_id' => 3,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 7, //Ler Avaliações
-            'role_id' => 3,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 8,
-            'role_id' => 3,
+            ['permission_id' => 5, 'role_id' => 3], //Ler Submissões
+            ['permission_id' => 7, 'role_id' => 3],//Ler Avaliações
+            ['permission_id' => 8, 'role_id' => 3],
         ]);
 
         //Pesquisador = 4
-
         DB::table('permission_role')->insert([
-            'permission_id' => 3, //Ler Inscrições
-            'role_id' => 4,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 5, //Ler Submissões
-            'role_id' => 4,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 6,
-            'role_id' => 4,
+            ['permission_id' => 3, 'role_id' => 4], //Ler Inscrições
+            ['permission_id' => 4, 'role_id' => 4],
+            ['permission_id' => 5, 'role_id' => 4], //Ler Submissões
+            ['permission_id' => 6, 'role_id' => 4],
+            ['permission_id' => 7, 'role_id' => 4],//Ler Avaliações
         ]);
 
         //Ouvinte = 5
-
         DB::table('permission_role')->insert([
-            'permission_id' => 3, //Ler Inscrições
-            'role_id' => 5,
-        ]);
-
-        DB::table('permission_role')->insert([
-            'permission_id' => 4,
-            'role_id' => 5,
+            ['permission_id' => 3, 'role_id' => 5],  //Ler Inscrições
+            ['permission_id' => 4, 'role_id' => 5]
         ]);
 
     }
