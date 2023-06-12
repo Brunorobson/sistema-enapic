@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('criterias', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('axis_id');
+            $table->unsignedBigInteger('axes_id');
             $table->string('name');
             $table->boolean('active');
             $table->timestamps();
 
-            $table->foreign('axis_id')->references('id')->on('axes');
+            $table->foreign('axes_id')->references('id')->on('axes');
         });
     }
 
