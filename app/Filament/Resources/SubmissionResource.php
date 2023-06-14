@@ -27,27 +27,27 @@ class SubmissionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required(),
-                Forms\Components\TextInput::make('event_id')
-                    ->required(),
-                Forms\Components\TextInput::make('axe_id')
-                    ->required(),
+                Forms\Components\Select::make('event_id')
+                    ->label('Evento')
+                    ->required()
+                    ->multiple()
+                    ->preload(),
+                Forms\Components\Select::make('axe_id')
+                    ->label('Eixo')
+                    ->required()
+                    ->multiple()
+                    ->preload(),
                 Forms\Components\TextInput::make('title')
+                    ->label('Título')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
+                    ->label('Descrição')
                     ->required()
                     ->maxLength(65535),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('file_upload')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('path_file')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\FileUpload::make('file_upload')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->required(),
             ]);
     }
 
@@ -62,10 +62,7 @@ class SubmissionResource extends Resource
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('file_upload'),
-                Tables\Columns\TextColumn::make('path_file'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])
             ->filters([
