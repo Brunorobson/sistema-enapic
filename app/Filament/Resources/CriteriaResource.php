@@ -17,6 +17,9 @@ class CriteriaResource extends Resource
 {
     protected static ?string $model = Criteria::class;
 
+    protected static ?string $modelLabel = 'Critério';
+    protected static ?string $pluralModelLabel = 'Critério';
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?int $navigationSort = 10;
 

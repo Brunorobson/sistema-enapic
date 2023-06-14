@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AvaliationResource extends Resource
 {
     protected static ?string $model = Avaliation::class;
+    protected static ?string $modelLabel = 'Avaliação';
+    protected static ?string $pluralModelLabel = 'Avaliação';
+
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -54,14 +57,14 @@ class AvaliationResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -69,5 +72,5 @@ class AvaliationResource extends Resource
             'create' => Pages\CreateAvaliation::route('/create'),
             'edit' => Pages\EditAvaliation::route('/{record}/edit'),
         ];
-    }    
+    }
 }

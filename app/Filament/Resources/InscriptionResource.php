@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
 class InscriptionResource extends Resource
 {
     protected static ?string $model = Inscription::class;
+    protected static ?string $modelLabel = 'Inscrição';
+    protected static ?string $pluralModelLabel = 'Inscrição';
+
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
