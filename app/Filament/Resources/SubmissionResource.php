@@ -12,6 +12,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class SubmissionResource extends Resource
 {
@@ -29,26 +30,36 @@ class SubmissionResource extends Resource
             ->schema([
                 Forms\Components\Select::make('event_id')
                     ->label('Evento')
-                    ->required()
-                    ->multiple()
-                    ->preload(),
-                Forms\Components\Select::make('axe_id')
+                    ->relationship('event', 'name'),
+                Forms\Components\Select::make('axis_id')
                     ->label('Eixo')
-                    ->required()
-                    ->multiple()
-                    ->preload(),
+                    ->relationship('axis', 'name'),
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->label('Descrição')
+                Forms\Components\RichEditor::make('resume')
+                    ->label('Resumo')
                     ->required()
-                    ->maxLength(65535),
-                Forms\Components\FileUpload::make('file_upload')
+                    ->maxLength(65535)
+                    ->disableToolbarButtons([
+                        'attachFiles',
+                        'codeBlock',
+                        'link',
+                        'orderedList',
+                        'bulletList',
+                        'undo',
+                        'redo',
+                    ])
+                    ->columnSpan(2),
+                Forms\Components\FileUpload::make('file')
                     ->acceptedFileTypes(['application/pdf'])
+                    ->preserveFilenames()
                     ->required(),
-            ]);
+                Forms\Components\TextInput::make('file_path')
+                ->required()
+                //não esquecer de colcoar o caminho do arquivo
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -59,9 +70,18 @@ class SubmissionResource extends Resource
                 Tables\Columns\TextColumn::make('event_id'),
                 Tables\Columns\TextColumn::make('axe_id'),
                 Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('file_upload'),
+                Tables\Columns\TextColumn::make('status')
+                ->formatStateUsing(function (string $state){
+                    return Submission::getStatus($state);
+                }),
+                Tables\Columns\IconColumn::make('file')
+                    ->options([
+                        'heroicon-o-x-circle',
+                        'heroicon-o-pencil' => 'draft',
+                        'heroicon-o-clock' => 'reviewing',
+                        'heroicon-o-check-circle' => 'published',
+                        'heroicon-o-cloud-download' => 'baixar pdf',
+                    ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
             ])
