@@ -65,9 +65,9 @@ class SubmissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id'),
-                Tables\Columns\TextColumn::make('event_id'),
-                Tables\Columns\TextColumn::make('axe_id'),
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('event.name'),
+                Tables\Columns\TextColumn::make('axis.name'),
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('status')
                 ->formatStateUsing(function (string $state){

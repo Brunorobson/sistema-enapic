@@ -10,11 +10,9 @@ class CreateSubmission extends CreateRecord
 {
     protected static string $resource = SubmissionResource::class;
 
-    protected function mutateFormDataBeforeCreate(array $data): array
-{
-    $data['user_id'] = auth()->id();
-
-    return $data;
-}
+    protected function mutateFormDataBeforeCreate(array $data): array{
+        $data['user_id'] = auth()->id();
+        return $data;
+    }
 
 }

@@ -47,17 +47,17 @@ class Submission extends Model
     }
     public static function getStatus($state){
         $array = array(
-            "P" => "Pendente",
-            "A" => "Aprovada",
-            "R" => "Reprovada"
+            'P' => 'Pendente',
+            'A' => 'Aprovada',
+            'R' => 'Reprovada'
         );
         return $array[$state];
     }
 
     public function scopeAccessibleByCurrentUser(Builder $query)
-{
-    return $query->where('user_id', Auth::id());
-}
+    {
+        return $query->where('user_id', Auth::id());
+    }
 
 }
 

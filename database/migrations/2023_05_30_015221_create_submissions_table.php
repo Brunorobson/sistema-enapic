@@ -24,7 +24,6 @@ return new class extends Migration
             $table->text('resume');
             $table->char('status')->default('P'); //'Pendente', 'Aprovada', 'Reprovada'
             $table->string('file');
-            $table->string('file_path');
             $table->timestamps();
         });
     }
