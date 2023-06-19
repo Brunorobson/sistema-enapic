@@ -56,8 +56,6 @@ class SubmissionResource extends Resource
                     ->acceptedFileTypes(['application/pdf'])
                     ->preserveFilenames()
                     ->required(),
-                Forms\Components\TextInput::make('file_path')
-                ->required()
                 //não esquecer de colcoar o caminho do arquivo
         ]);
     }
