@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class Submission extends Model
@@ -51,33 +53,12 @@ class Submission extends Model
         );
         return $array[$state];
     }
-    
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->withoutGlobalScopes();
-    }
 
-    public static function boot()
+    public function scopeAccessibleByCurrentUser(Builder $query)
 {
-    parent::boot();
-    Gate::before(function (User $user, $ability) {
-    if (auth()->check()) {
-        $user = auth()->user();
-        
-        // Verifica se o usuário tem permissão de administrador ou suporte
-        if ($user->isSupport() or $user->isAdmin()) {
-            static::getEloquentQuery('default', fn ($query) => $query);
-        } else {
-            // Filtra as submissões apenas para o usuário logado
-            static::getEloquentQuery('default', fn ($query) => $query->where('user_id', $user->id));
-        }
-    } else {
-        // Filtra para não exibir nenhuma submissão quando o usuário não estiver logado
-        static::getEloquentQuery('default', fn ($query) => $query->whereRaw('1 = 0'));
-        
-    }
-});
+    return $query->where('user_id', Auth::id());
 }
+
 }
 
 

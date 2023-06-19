@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,7 @@ class SubmissionResource extends Resource
                     ->acceptedFileTypes(['application/pdf'])
                     ->preserveFilenames()
                     ->required(),
-                //não esquecer de colcoar o caminho do arquivo
+
         ]);
     }
 
@@ -108,5 +109,14 @@ class SubmissionResource extends Resource
             'create' => Pages\CreateSubmission::route('/create'),
             'edit' => Pages\EditSubmission::route('/{record}/edit'),
         ];
+    }
+
+    public static function indexQuery(Request $request, $query)
+    {
+        if (Auth::user()->isAdmin() || Auth::user()->isSupport()) {
+            return $query;
+        }
+
+        return $query->accessibleByCurrentUser();
     }
 }
