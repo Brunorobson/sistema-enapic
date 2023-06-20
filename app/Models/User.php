@@ -110,6 +110,7 @@ class User extends Authenticatable
 
     public function hasPermissionTo(string $permission): bool
     {
+        //dd($permission);
         return in_array($permission, $this->permissions());
     }
 
