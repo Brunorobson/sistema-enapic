@@ -37,7 +37,10 @@ class InscriptionPolicy
      */
     public function update(User $user, Inscription $inscription): bool
     {
-        return $user->hasPermissionTo('write_inscriptions');
+        if ($user->isSupport() or $user->isAdmin()) {
+            return true;
+        }
+        return false;
     }
 
     /**

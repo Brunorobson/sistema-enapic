@@ -13,8 +13,19 @@ class EditInscription extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            //Actions\ViewAction::make(),
+            //Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Inscrição atualizada com sucesso!';
+    }
+
 }

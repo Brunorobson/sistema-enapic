@@ -21,8 +21,8 @@ class SubmissionPolicy
      */
     public function view(User $user, Submission $submission): bool
     {
-        //return $user->id == $submission->user_id;
-        return $user->hasPermissionTo('read_submissions');
+        return $user->id == $submission->user_id;
+        //return $user->hasPermissionTo('read_submissions');
     }
 
     /**
@@ -38,8 +38,8 @@ class SubmissionPolicy
      */
     public function update(User $user, Submission $submission): bool
     {
-        //return $user->id == $submission->user_id;
-        return $user->hasPermissionTo('write_submissions');
+        return $user->id == $submission->user_id;
+        //return $user->hasPermissionTo('write_submissions');
     }
 
     /**
@@ -47,7 +47,8 @@ class SubmissionPolicy
      */
     public function delete(User $user, Submission $submission): bool
     {
-        return $user->hasPermissionTo('write_submissions');
+        return $user->id == $submission->user_id;
+        //return $user->hasPermissionTo('write_submissions');
     }
 
     /**
@@ -63,6 +64,7 @@ class SubmissionPolicy
      */
     public function forceDelete(User $user, Submission $submission): bool
     {
-        return $user->hasPermissionTo('write_submissions');
+        return $user->id == $submission->user_id;
+        //return $user->hasPermissionTo('write_submissions');
     }
 }

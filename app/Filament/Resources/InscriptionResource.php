@@ -33,23 +33,30 @@ class InscriptionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('uuid')
-                    ->required()
-                    ->maxLength(36),
+                Forms\Components\Hidden::make('uuid'),
 
                 Select::make('user_id')
                     ->required()
-                    ->searchable(['name', 'cpf'])
-                    ->label('Usuário')
-                    ->placeholder('Pesquise por nome ou cpf')
+                    ->disabled()
+                    ->label('Participante')
                     ->relationship('user', 'name')
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->cpf}"),
 
-                Forms\Components\TextInput::make('event_id')
-                    ->required(),
-                Forms\Components\TextInput::make('status')
+                Select::make('event_id')
                     ->required()
-                    ->maxLength(255),
+                    ->disabled()
+                    ->label('Evento')
+                    ->relationship('event', 'name'),
+
+                Select::make('status')
+                    ->required()
+                    ->placeholder('Selecione')
+                    ->options([
+                        'P' => 'Pendente',
+                        'A' => 'Ativa',
+                        'C' => 'Cancelada'
+                    ]),
+
             ]);
     }
 
@@ -60,6 +67,8 @@ class InscriptionResource extends Resource
                 //Tables\Columns\TextColumn::make('uuid'),
                 Tables\Columns\TextColumn::make('user.name')
                 ->label('PARTICIPANTE'),
+                Tables\Columns\TextColumn::make('user.cpf')
+                ->label('CPF'),
                 Tables\Columns\TextColumn::make('event.name')
                 ->label('EVENTO'),
                 Tables\Columns\TextColumn::make('status')
@@ -76,11 +85,11 @@ class InscriptionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                //Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -96,7 +105,7 @@ class InscriptionResource extends Resource
         return [
             'index' => Pages\ListInscriptions::route('/'),
             //'create' => Pages\CreateInscription::route('/create'),
-            'view' => Pages\ViewInscription::route('/{record}'),
+            //'view' => Pages\ViewInscription::route('/{record}'),
             'edit' => Pages\EditInscription::route('/{record}/edit'),
         ];
     }

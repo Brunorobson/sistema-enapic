@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\SubmissionScope;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
@@ -14,6 +15,11 @@ class Submission extends Model
 {
     use HasFactory;
     use HasEvents;
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new SubmissionScope);
+    }
 
     protected $fillable = [
         'user_id',

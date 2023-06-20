@@ -25,7 +25,7 @@
 
                             <div class="mt-4">
                                 <x-label for="cpf" value="{{ __('CPF') }}" />
-                                <x-input id="cpf" class="block mt-1 w-full" type="text" placeholder="Só números" maxlength="11" name="cpf" :value="old('cpf')" required autocomplete="no"/>
+                                <x-input id="cpf" x-data="" x-mask="999.999.999-99" class="block mt-1 w-full" type="text" maxlength="14" name="cpf" :value="old('cpf')" required autocomplete="no"/>
                             </div>
 
                             <div class="mt-4">

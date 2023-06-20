@@ -40,8 +40,7 @@ class PermissionSeeder extends Seeder
         ]);
 
         //Avaliador = 3
-        DB::table('permission_role')->insert([
-            ['permission_id' => 5, 'role_id' => 3], //Ler Submissões
+        DB::table('permission_role')->insert([//Ler Submissões
             ['permission_id' => 7, 'role_id' => 3],//Ler Avaliações
             ['permission_id' => 8, 'role_id' => 3],
         ]);
@@ -52,7 +51,6 @@ class PermissionSeeder extends Seeder
             ['permission_id' => 4, 'role_id' => 4],
             ['permission_id' => 5, 'role_id' => 4], //Ler Submissões
             ['permission_id' => 6, 'role_id' => 4],
-            ['permission_id' => 7, 'role_id' => 4],//Ler Avaliações
         ]);
 
         //Ouvinte = 5
