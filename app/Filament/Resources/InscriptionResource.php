@@ -22,7 +22,12 @@ class InscriptionResource extends Resource
     protected static ?string $pluralModelLabel = 'Inscrição';
 
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user-add';
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -53,13 +58,18 @@ class InscriptionResource extends Resource
         return $table
             ->columns([
                 //Tables\Columns\TextColumn::make('uuid'),
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('event.name'),
+                Tables\Columns\TextColumn::make('user.name')
+                ->label('PARTICIPANTE'),
+                Tables\Columns\TextColumn::make('event.name')
+                ->label('EVENTO'),
                 Tables\Columns\TextColumn::make('status')
-                ->formatStateUsing(function (string $state){
-                    return Inscription::getStatus($state);
-                }),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/y H:i')->label('CADASTRO'),
+                    ->label('STATUS')
+                    ->formatStateUsing(function (string $state){
+                        return Inscription::getStatus($state);
+                    }),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('d/m/Y H:i')
+                    ->label('CADASTRO'),
 
             ])
             ->filters([

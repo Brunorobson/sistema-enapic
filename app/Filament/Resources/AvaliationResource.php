@@ -20,7 +20,12 @@ class AvaliationResource extends Resource
     protected static ?string $pluralModelLabel = 'Avaliação';
 
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-star';
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {

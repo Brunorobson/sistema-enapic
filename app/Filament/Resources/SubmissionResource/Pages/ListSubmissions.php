@@ -10,10 +10,11 @@ class ListSubmissions extends ListRecords
 {
     protected static string $resource = SubmissionResource::class;
 
+
     protected function getActions(): array
     {
         return [
-            //Actions\CreateAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }

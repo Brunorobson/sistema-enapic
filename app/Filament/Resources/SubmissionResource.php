@@ -11,6 +11,8 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ViewColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +25,12 @@ class SubmissionResource extends Resource
     protected static ?string $pluralModelLabel = 'Submissões';
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -33,7 +40,7 @@ class SubmissionResource extends Resource
                     ->label('Evento')
                     ->placeholder('Selecione')
                     ->relationship('event', 'name'),
-                    
+
                 Forms\Components\Select::make('axis_id')
                     ->label('Eixo')
                     ->placeholder('Selecione')
@@ -75,7 +82,7 @@ class SubmissionResource extends Resource
                 ->formatStateUsing(function (string $state){
                     return Submission::getStatus($state);
                 }),
-                
+
                 //Tables\Columns\TextColumn::make('file'),
                 /*Tables\Columns\IconColumn::make('file')
                     ->options([
@@ -90,7 +97,7 @@ class SubmissionResource extends Resource
                     ->label('CADASTRO'),
             ])
             ->filters([
-                //
+                SelectFilter::make('user')->relationship('user', 'name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

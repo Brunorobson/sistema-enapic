@@ -28,7 +28,12 @@ class EventResource extends Resource
     protected static ?string $pluralModelLabel = 'Eventos';
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
