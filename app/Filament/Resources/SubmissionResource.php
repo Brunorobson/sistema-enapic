@@ -10,7 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use GuzzleHttp\Psr7\Request;
+use Filament\Tables\Columns\ViewColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
@@ -31,31 +31,27 @@ class SubmissionResource extends Resource
             ->schema([
                 Forms\Components\Select::make('event_id')
                     ->label('Evento')
+                    ->placeholder('Selecione')
                     ->relationship('event', 'name'),
+                    
                 Forms\Components\Select::make('axis_id')
                     ->label('Eixo')
+                    ->placeholder('Selecione')
                     ->relationship('axis', 'name'),
+
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\RichEditor::make('resume')
+
+                Forms\Components\Textarea::make('resume')
                     ->label('Resumo')
                     ->required()
-                    ->maxLength(65535)
-                    ->disableToolbarButtons([
-                        'attachFiles',
-                        'codeBlock',
-                        'link',
-                        'orderedList',
-                        'bulletList',
-                        'undo',
-                        'redo',
-                    ])
                     ->columnSpan(2),
+
                 Forms\Components\FileUpload::make('file')
+                    ->directory('submissions')
                     ->acceptedFileTypes(['application/pdf'])
-                    ->preserveFilenames()
                     ->required(),
 
         ]);
@@ -65,24 +61,33 @@ class SubmissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('event.name'),
-                Tables\Columns\TextColumn::make('axis.name'),
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE'),
+                Tables\Columns\TextColumn::make('event.name')->label('EVENTO'),
+                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')
+                ->formatStateUsing(function (string $state){
+                    return substr($state, 0, 6);
+                }),
+                Tables\Columns\TextColumn::make('title')->label('TÍTULO'),
+
+                ViewColumn::make('file')->view('components.view-colum-file')->label('ARQUIVO'),
+
+                Tables\Columns\TextColumn::make('status')->label('STATUS')
                 ->formatStateUsing(function (string $state){
                     return Submission::getStatus($state);
                 }),
-                Tables\Columns\IconColumn::make('file')
+                
+                //Tables\Columns\TextColumn::make('file'),
+                /*Tables\Columns\IconColumn::make('file')
                     ->options([
                         'heroicon-o-x-circle',
                         'heroicon-o-pencil' => 'draft',
                         'heroicon-o-clock' => 'reviewing',
                         'heroicon-o-check-circle' => 'published',
                         'heroicon-o-cloud-download' => 'baixar pdf',
-                    ]),
+                    ]),*/
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime('d/m/Y')
+                    ->label('CADASTRO'),
             ])
             ->filters([
                 //
@@ -106,17 +111,9 @@ class SubmissionResource extends Resource
     {
         return [
             'index' => Pages\ListSubmissions::route('/'),
-            'create' => Pages\CreateSubmission::route('/create'),
+            //'create' => Pages\CreateSubmission::route('/create'),
             'edit' => Pages\EditSubmission::route('/{record}/edit'),
         ];
     }
 
-    public static function indexQuery(Request $request, $query)
-    {
-        if (Auth::user()->isAdmin() || Auth::user()->isSupport()) {
-            return $query;
-        }
-
-        return $query->accessibleByCurrentUser();
-    }
 }

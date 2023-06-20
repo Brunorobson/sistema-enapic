@@ -15,4 +15,14 @@ class CreateSubmission extends CreateRecord
         return $data;
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Artigo submetido com sucesso!';
+    }
+
 }
