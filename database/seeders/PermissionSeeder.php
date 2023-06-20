@@ -16,10 +16,13 @@ class PermissionSeeder extends Seeder
         DB::table('permissions')->insert([
             ['id' => 1, 'name' => 'Ler Usuários', 'guard_name' => 'read_users'],
             ['id' => 2, 'name' => 'Escrever Usuários', 'guard_name' => 'write_users'],
+
             ['id' => 3, 'name' => 'Ler Inscrições', 'guard_name' => 'read_inscriptions'],
             ['id' => 4, 'name' => 'Escrever Inscrições', 'guard_name' => 'write_inscriptions'],
+
             ['id' => 5, 'name' => 'Ler Submissões', 'guard_name' => 'read_submissions'],
             ['id' => 6, 'name' => 'Escrever Submissões', 'guard_name' => 'write_submissions'],
+            
             ['id' => 7, 'name' => 'Ler Avaliações', 'guard_name' => 'read_avaliantions'],
             ['id' => 8, 'name' => 'Escrever Avaliações', 'guard_name' => 'write_avaliantions'],
         ]);

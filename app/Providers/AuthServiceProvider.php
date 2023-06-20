@@ -24,18 +24,21 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->registerPolicies();
+        
         Gate::before(function (User $user, $ability) {
             if ($user->isSupport() or $user->isAdmin()) {
                 return true;
             }
         });
 
-        Gate::before(function (User $user, $ability) {
-            return $user->hasPermissionTo($ability);
+       //Gate::before(function (User $user, $ability) {
+            //var_dump($ability);
+            //return $user->hasPermissionTo($ability);
             /*if (Permission::existsOnCache($ability)) {
                 return $user->hasPermissionTo($ability);
             }*/
-        });
+       // });
     }
 
 }
