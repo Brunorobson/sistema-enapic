@@ -28,7 +28,7 @@ class Submission extends Model
         'title',
         'resume',
         'status',
-        'file',
+        'file'
     ];
 
 

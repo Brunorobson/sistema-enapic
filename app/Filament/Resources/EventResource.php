@@ -72,7 +72,7 @@ class EventResource extends Resource
                 TernaryFilter::make('active')->label('Ativo?')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
                 //Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

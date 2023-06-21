@@ -19,7 +19,7 @@ class AvaliationResource extends Resource
 {
     protected static ?string $model = Avaliation::class;
     protected static ?string $modelLabel = 'Avaliação';
-    protected static ?string $pluralModelLabel = 'Avaliação';
+    protected static ?string $pluralModelLabel = 'Avaliações';
 
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
@@ -34,11 +34,14 @@ class AvaliationResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('user_id')
-                    ->required(),
+                    ->required()
+                    ->label('PARTICIPANTE'),
                 Forms\Components\TextInput::make('submission_id')
-                    ->required(),
+                    ->required()
+                    ->label('SUBMISSÃO'),
                 Forms\Components\TextInput::make('total')
-                    ->required(),
+                    ->required()
+                    ->label('Total'),
             ]);
     }
 
@@ -48,16 +51,17 @@ class AvaliationResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')->searchable(),
                 Tables\Columns\TextColumn::make('submissions')->label('SUBMISSÃO')->searchable(),
+                Tables\Columns\TextColumn::make('user.evaluators')->label('AVALIADOR')->searchable(),
                 Tables\Columns\TextColumn::make('total'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('AVALIADO')
                     ->dateTime('d/m/Y'),
             ])
             ->filters([
-                SelectFilter::make('user.name')->label('Participant?')->placeholder('Todos')
+                //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

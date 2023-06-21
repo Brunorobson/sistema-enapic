@@ -50,7 +50,7 @@ class UserResource extends Resource
                     ->required(fn (string $context): bool => $context === 'create'),
                 Forms\Components\Select::make('roles')
                     ->multiple()
-                    ->label('ROLES')
+                    ->label('PERFIL')
                     ->relationship('roles', titleColumnName: 'name')
                     ->preload()
             ]);
@@ -69,10 +69,10 @@ class UserResource extends Resource
                     ->label('CADASTRO'),
             ])
             ->filters([
-                SelectFilter::make('name')->label('Procurar por Usúario')->placeholder('Todos')
+                SelectFilter::make('name')->label('Pesquisar por Usúario')->placeholder('Selecione')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
