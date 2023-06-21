@@ -119,7 +119,7 @@ class User extends Authenticatable
         /** @var Role $role */
 
         if (!$this->roles()->get()->contains($role_id)) {
-            $this->roles()->attach($role_id);
+            $this->roles()->sync([$role_id]);
         }
     }
 
