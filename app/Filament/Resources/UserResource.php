@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
@@ -33,22 +34,23 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Nome Completo')
+                    ->label('NOME')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
-                    ->label('E-mail')
+                    ->label('E-MAIL')
                     ->email()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('password')
-                    ->label('Senha')
+                    ->label('SENHA')
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
                 Forms\Components\Select::make('roles')
                     ->multiple()
+                    ->label('ROLES')
                     ->relationship('roles', titleColumnName: 'name')
                     ->preload()
             ]);
@@ -59,15 +61,15 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                ->label('Nome Completo')                ,
+                ->label('NOME')                ,
                 Tables\Columns\TextColumn::make('email')
-                ->label('E-Mail')                ,
+                ->label('E-MAIL')                ,
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y')
-                    ->label('Data de Criação'),
+                    ->label('CADASTRO'),
             ])
             ->filters([
-                //
+                SelectFilter::make('name')->label('Procurar por Usúario')->placeholder('Todos')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
