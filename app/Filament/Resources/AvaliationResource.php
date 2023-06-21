@@ -6,10 +6,12 @@ use App\Filament\Resources\AvaliationResource\Pages;
 use App\Filament\Resources\AvaliationResource\RelationManagers;
 use App\Models\Avaliation;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -44,16 +46,15 @@ class AvaliationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id'),
-                Tables\Columns\TextColumn::make('submission_id'),
+                Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')->searchable(),
+                Tables\Columns\TextColumn::make('submissions')->label('SUBMISSÃO')->searchable(),
                 Tables\Columns\TextColumn::make('total'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->label('AVALIADO')
+                    ->dateTime('d/m/Y'),
             ])
             ->filters([
-                //
+                SelectFilter::make('user.name')->label('Participant?')->placeholder('Todos')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

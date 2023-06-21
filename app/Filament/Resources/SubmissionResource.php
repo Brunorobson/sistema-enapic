@@ -21,7 +21,7 @@ class SubmissionResource extends Resource
 {
     protected static ?string $model = Submission::class;
 
-    protected static ?string $modelLabel = 'Submissão';
+    // protected static ?string $modelLabel = 'Submissão';
     protected static ?string $pluralModelLabel = 'Submissões';
     protected static ?int $navigationSort = 3;
 
@@ -58,7 +58,6 @@ class SubmissionResource extends Resource
 
                 Forms\Components\FileUpload::make('file')
                     ->directory('submissions')
-                    ->acceptedFileTypes(['application/pdf'])
                     ->required(),
 
         ]);
@@ -68,13 +67,13 @@ class SubmissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE'),
-                Tables\Columns\TextColumn::make('event.name')->label('EVENTO'),
-                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')
+                Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')->searchable(),
+                Tables\Columns\TextColumn::make('event.name')->label('EVENTO')->searchable(),
+                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')->searchable()
                 ->formatStateUsing(function (string $state){
                     return substr($state, 0, 6);
                 }),
-                Tables\Columns\TextColumn::make('title')->label('TÍTULO'),
+                Tables\Columns\TextColumn::make('title')->label('TÍTULO')->searchable(),
 
                 ViewColumn::make('file')->view('components.view-colum-file')->label('ARQUIVO'),
 
@@ -93,11 +92,11 @@ class SubmissionResource extends Resource
                         'heroicon-o-cloud-download' => 'baixar pdf',
                     ]),*/
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('d/m/Y')
+                    ->dateTime('d/m/Y H:m')
                     ->label('CADASTRO'),
             ])
             ->filters([
-                SelectFilter::make('user')->relationship('user', 'name')
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
