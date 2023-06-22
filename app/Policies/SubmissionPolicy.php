@@ -38,6 +38,10 @@ class SubmissionPolicy
      */
     public function update(User $user, Submission $submission): bool
     {
+        if ($submission->status != 'P') {
+            return false;
+        }
+
         return $user->id == $submission->user_id;
         //return $user->hasPermissionTo('write_submissions');
     }

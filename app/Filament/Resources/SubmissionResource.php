@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ViewColumn;
+use Filament\Forms\Components\ViewField;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,7 +22,7 @@ class SubmissionResource extends Resource
 {
     protected static ?string $model = Submission::class;
 
-    // protected static ?string $modelLabel = 'Submissão';
+    protected static ?string $modelLabel = 'Submissão';
     protected static ?string $pluralModelLabel = 'Submissões';
     protected static ?int $navigationSort = 3;
 
@@ -67,6 +68,9 @@ class SubmissionResource extends Resource
                     ->columnSpan(2)
                     ->required(),
 
+                ViewField::make('file_path')
+                ->view('components.view-field-file')
+
         ]);
     }
 
@@ -88,7 +92,7 @@ class SubmissionResource extends Resource
                 }),
 
                 ViewColumn::make('file')->view('components.view-colum-file')->label('ARQUIVO'),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:m')
                     ->label('CADASTRO'),
@@ -97,10 +101,11 @@ class SubmissionResource extends Resource
 
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make()->label('Editar'),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -117,6 +122,7 @@ class SubmissionResource extends Resource
             'index' => Pages\ListSubmissions::route('/'),
             'create' => Pages\CreateSubmission::route('/create'),
             'edit' => Pages\EditSubmission::route('/{record}/edit'),
+            'view' => Pages\ViewSubmission::route('/{record}'),
         ];
     }
 
