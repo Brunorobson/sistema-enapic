@@ -1,3 +1,3 @@
 <div>
-    <a href="{{ $getState() }}">Arquivo</a>
+    <a target="_blank" href="/storage/{{ $getState() }}">Arquivo</a>
 </div>

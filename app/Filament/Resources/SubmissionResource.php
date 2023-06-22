@@ -38,18 +38,22 @@ class SubmissionResource extends Resource
             ->schema([
                 Forms\Components\Select::make('event_id')
                     ->label('Evento')
+                    ->default(1)
+                    ->required()
                     ->placeholder('Selecione')
                     ->relationship('event', 'name'),
 
                 Forms\Components\Select::make('axis_id')
                     ->label('Eixo')
+                    ->required()
                     ->placeholder('Selecione')
                     ->relationship('axis', 'name'),
 
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpan(2),
 
                 Forms\Components\Textarea::make('resume')
                     ->label('Resumo')
@@ -58,6 +62,9 @@ class SubmissionResource extends Resource
 
                 Forms\Components\FileUpload::make('file')
                     ->directory('submissions')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->label('Arquivo')
+                    ->columnSpan(2)
                     ->required(),
 
         ]);
@@ -75,22 +82,13 @@ class SubmissionResource extends Resource
                 }),
                 Tables\Columns\TextColumn::make('title')->label('TÍTULO')->searchable(),
 
-                ViewColumn::make('file')->view('components.view-colum-file')->label('ARQUIVO'),
-
                 Tables\Columns\TextColumn::make('status')->label('STATUS')
                 ->formatStateUsing(function (string $state){
                     return Submission::getStatus($state);
                 }),
 
-                //Tables\Columns\TextColumn::make('file'),
-                /*Tables\Columns\IconColumn::make('file')
-                    ->options([
-                        'heroicon-o-x-circle',
-                        'heroicon-o-pencil' => 'draft',
-                        'heroicon-o-clock' => 'reviewing',
-                        'heroicon-o-check-circle' => 'published',
-                        'heroicon-o-cloud-download' => 'baixar pdf',
-                    ]),*/
+                ViewColumn::make('file')->view('components.view-colum-file')->label('ARQUIVO'),
+                
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:m')
                     ->label('CADASTRO'),
@@ -117,7 +115,7 @@ class SubmissionResource extends Resource
     {
         return [
             'index' => Pages\ListSubmissions::route('/'),
-            //'create' => Pages\CreateSubmission::route('/create'),
+            'create' => Pages\CreateSubmission::route('/create'),
             'edit' => Pages\EditSubmission::route('/{record}/edit'),
         ];
     }
