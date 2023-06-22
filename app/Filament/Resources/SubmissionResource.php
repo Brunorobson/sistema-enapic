@@ -6,6 +6,7 @@ use App\Filament\Resources\SubmissionResource\Pages;
 use App\Filament\Resources\SubmissionResource\RelationManagers;
 use App\Models\Submission;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -37,39 +38,54 @@ class SubmissionResource extends Resource
     {
         return $form
             ->schema([
+
+                Grid::make()->schema([
                 Forms\Components\Select::make('event_id')
                     ->label('Evento')
                     ->default(1)
                     ->required()
                     ->placeholder('Selecione')
-                    ->relationship('event', 'name'),
+                    ->relationship('event', 'name')
+                    ->columnSpan(3),
 
                 Forms\Components\Select::make('axis_id')
                     ->label('Eixo')
                     ->required()
                     ->placeholder('Selecione')
-                    ->relationship('axis', 'name'),
+                    ->relationship('axis', 'name')
+                    ->columnSpan(3),
 
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpan(2),
+                    ->columnSpan(6),
 
                 Forms\Components\Textarea::make('resume')
                     ->label('Resumo')
                     ->required()
-                    ->columnSpan(2),
+                    ->columnSpan(6),
 
                 Forms\Components\FileUpload::make('file')
                     ->directory('submissions')
                     ->acceptedFileTypes(['application/pdf'])
                     ->label('Arquivo')
-                    ->columnSpan(2)
+                    ->columnSpan(5)
                     ->required(),
 
                 ViewField::make('file_path')
-                ->view('components.view-field-file')
+                ->view('components.view-field-file'),
+
+                Forms\Components\Select::make('evaluators')
+                    ->multiple()
+                    ->label('Avaliadores')
+                    ->relationship('evaluators', 'name', fn (Builder $query) => $query->select('users.*')
+                    ->join('role_user as r', 'r.user_id', 'users.id')
+                    ->where('r.role_id', 3))
+                    ->preload()
+                    ->columnSpan(6),
+
+            ])->columns(6)
 
         ]);
     }

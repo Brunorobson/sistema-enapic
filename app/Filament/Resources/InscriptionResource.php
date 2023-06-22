@@ -6,6 +6,7 @@ use App\Filament\Resources\InscriptionResource\Pages;
 use App\Filament\Resources\InscriptionResource\RelationManagers;
 use App\Models\Inscription;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Form;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
@@ -35,29 +36,34 @@ class InscriptionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Hidden::make('uuid'),
 
-                Select::make('user_id')
-                    ->required()
-                    ->disabled()
-                    ->label('Participante')
-                    ->relationship('user', 'name')
-                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->cpf}"),
+                Grid::make()->schema([
 
-                Select::make('event_id')
-                    ->required()
-                    ->disabled()
-                    ->label('Evento')
-                    ->relationship('event', 'name'),
+                    Forms\Components\Hidden::make('uuid'),
 
-                Select::make('status')
-                    ->required()
-                    ->placeholder('Selecione')
-                    ->options([
-                        'P' => 'Pendente',
-                        'A' => 'Ativa',
-                        'C' => 'Cancelada'
-                    ]),
+                    Select::make('user_id')
+                        ->required()
+                        ->disabled()
+                        ->label('Participante')
+                        ->relationship('user', 'name')
+                        ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} - {$record->cpf}"),
+
+                    Select::make('event_id')
+                        ->required()
+                        ->disabled()
+                        ->label('Evento')
+                        ->relationship('event', 'name'),
+
+                    Select::make('status')
+                        ->required()
+                        ->placeholder('Selecione')
+                        ->options([
+                            'P' => 'Pendente',
+                            'A' => 'Ativa',
+                            'C' => 'Cancelada'
+                        ]),
+
+                ])->columns(3)
 
             ]);
     }

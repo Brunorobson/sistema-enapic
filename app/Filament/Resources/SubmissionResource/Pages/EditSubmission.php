@@ -16,4 +16,11 @@ class EditSubmission extends EditRecord
             //Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['file_path'] = $data['file'];
+        return $data;
+    }
+
 }

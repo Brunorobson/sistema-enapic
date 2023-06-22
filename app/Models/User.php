@@ -4,6 +4,7 @@ namespace App\Models;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 //use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -123,12 +124,17 @@ class User extends Authenticatable
         }
     }
 
-    public function submissions()
+    public function submissions(): BelongsToMany
     {
-        return $this->belongsToMany(Submission::class, 'user_submissions')->withTimestamps();
-        //retorna uma relação muitos-para-muitos entre o modelo User e o modelo Submission com a tabela intermediária
-        //chamada user_submissions e o método withTimestamps() define que a tabela intermediária deve ter os campos created_at e updated_at
+        return $this->belongsToMany(Submission::class, 'avaliations', 'user_id', 'submission_id');
     }
+
+    // public function submissions()
+    // {
+    //     return $this->belongsToMany(Submission::class, 'user_submissions')->withTimestamps();
+    //     //retorna uma relação muitos-para-muitos entre o modelo User e o modelo Submission com a tabela intermediária
+    //     //chamada user_submissions e o método withTimestamps() define que a tabela intermediária deve ter os campos created_at e updated_at
+    // }
 
     public function associarSubmissao(Submission $submissao)
     {
