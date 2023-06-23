@@ -9,11 +9,11 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewSubmission extends ViewRecord
 {
     protected static string $resource = SubmissionResource::class;
-    protected static ?string $title = 'Visualização de Subimissão';
+    protected static ?string $title = 'Visualização de Submissão';
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $data['file_path'] = $data['file'];    
+        $data['file_path'] = $data['file'];
         return $data;
     }
 
