@@ -15,11 +15,13 @@ class SubmissionScope implements Scope
     public function apply(Builder $builder, Model $model): void
     {
         /** @var User $user */
-        
+
         $user = Auth::user();
         if (!($user->isSupport() or $user->isAdmin())) {
-            $builder->where('user_id', $user->id);
+            if(!$user->hasRole(3)){
+                $builder->where('user_id', $user->id);
+            }
         }
-        
+
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Avaliation extends Model
 {
@@ -20,7 +21,7 @@ class Avaliation extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function event()
+    public function submission()
     {
         return $this->belongsTo(Submission::class);
     }
@@ -28,5 +29,10 @@ class Avaliation extends Model
     public function avaliationItems()
     {
         return $this->hasMany(AvaliationItem::class);
+    }
+
+    public function criterias(): BelongsToMany
+    {
+        return $this->belongsToMany(Criteria::class, 'avaliation_items', 'avaliation_id', 'criteria_id');
     }
 }

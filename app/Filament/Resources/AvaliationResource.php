@@ -5,14 +5,18 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AvaliationResource\Pages;
 use App\Filament\Resources\AvaliationResource\RelationManagers;
 use App\Models\Avaliation;
+use App\Models\Submission;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AvaliationResource extends Resource
@@ -34,15 +38,29 @@ class AvaliationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
+                Card::make()->schema([
+
+                Select::make('user_id')
                     ->required()
-                    ->label('PARTICIPANTE'),
-                Forms\Components\TextInput::make('submission_id')
+                    ->disabled()
+                    ->relationship('user', 'name')
+                    ->label('Avaliador')
+                    ->columnSpan(3),
+
+                Select::make('submission_id')
                     ->required()
-                    ->label('SUBMISSÃO'),
+                    ->disabled()
+                    ->relationship('submission', 'title')
+                    ->label('Submissão')
+                    ->columnSpan(5),
+
                 Forms\Components\TextInput::make('total')
                     ->required()
-                    ->label('Total'),
+                    ->label('Nota Total')
+                    ->disabled()
+                    ->columnSpan(2),
+
+            ])->columns(10)
             ]);
     }
 
@@ -50,19 +68,27 @@ class AvaliationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')->searchable(),
-                Tables\Columns\TextColumn::make('submissions')->label('SUBMISSÃO')->searchable(),
-                Tables\Columns\TextColumn::make('user.evaluators')->label('AVALIADOR')->searchable(),
-                Tables\Columns\TextColumn::make('total'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('AVALIADO')
-                    ->dateTime('d/m/Y'),
+                Tables\Columns\TextColumn::make('user.name')->label('AVALIADOR')->searchable(),
+                Tables\Columns\TextColumn::make('submission.title')->label('SUBMISSÃO')->searchable(),
+                Tables\Columns\TextColumn::make('submission.user.name')->label('PARTICIPANTE')->searchable(),
+                Tables\Columns\TextColumn::make('submission.user.cpf')->label('CPF')->searchable(),
+                Tables\Columns\BadgeColumn::make('submission.status')->label('STATUS DA SUBMISSÃO')
+                ->formatStateUsing(function (string $state){
+                    return Submission::getStatus($state);
+                })
+                ->colors([
+                    'warning' => 'P',
+                    'success' => 'A',
+                    'danger' => 'R']),
+                ViewColumn::make('submission.file')->view('components.view-colum-file')->label('ARQUIVO'),
+                Tables\Columns\TextColumn::make('total')->label('NOTA TOTAL'),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\EditAction::make()->label('Avaliar'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

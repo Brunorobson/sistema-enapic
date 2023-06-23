@@ -19,6 +19,17 @@ class EditSubmission extends EditRecord
         ];
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Submissão atualizada com sucesso!';
+    }
+
+
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $data['file_path'] = $data['file'];

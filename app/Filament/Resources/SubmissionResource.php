@@ -6,7 +6,9 @@ use App\Filament\Resources\SubmissionResource\Pages;
 use App\Filament\Resources\SubmissionResource\RelationManagers;
 use App\Models\Submission;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -41,7 +43,7 @@ class SubmissionResource extends Resource
         return $form
             ->schema([
 
-                Grid::make()->schema([
+                Card::make()->schema([
                 Forms\Components\Select::make('event_id')
                     ->label('Evento')
                     ->default(1)
@@ -87,11 +89,19 @@ class SubmissionResource extends Resource
                     ->join('role_user as r', 'r.user_id', 'users.id')
                     ->where('r.role_id', 3))
                     ->preload()
-                    ->hidden($user->hasRole(4))
-                    ->columnSpan(6),
+                    ->hidden(!($user->hasRole(1) or $user->hasRole(2)))
+                    ->columnSpan(5),
+
+                Select::make('status')
+                    ->placeholder('Selecione')
+                    ->hidden(!($user->hasRole(1) or $user->hasRole(2)))
+                    ->options([
+                        'P' => 'Pendente',
+                        'A' => 'Aprovada',
+                        'R' => 'Reprovada'
+                    ]),
 
             ])->columns(6)
-
         ]);
     }
 

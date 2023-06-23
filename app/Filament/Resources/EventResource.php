@@ -6,7 +6,7 @@ use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Card;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -41,7 +41,7 @@ class EventResource extends Resource
         return $form
             ->schema([
 
-                Grid::make()->schema([
+                Card::make()->schema([
                     TextInput::make('name')
                         ->required()
                         ->maxLength(255)

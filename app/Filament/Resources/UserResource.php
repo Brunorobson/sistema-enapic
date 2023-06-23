@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -33,6 +34,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Card::make()->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('NOME')
                     ->required()
@@ -53,6 +55,7 @@ class UserResource extends Resource
                     ->label('PERFIL')
                     ->relationship('roles', titleColumnName: 'name')
                     ->preload()
+                ])->columns(2)
             ]);
     }
 

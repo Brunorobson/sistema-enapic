@@ -6,7 +6,7 @@ use App\Filament\Resources\InscriptionResource\Pages;
 use App\Filament\Resources\InscriptionResource\RelationManagers;
 use App\Models\Inscription;
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Card;
 use Filament\Resources\Form;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
@@ -38,7 +38,7 @@ class InscriptionResource extends Resource
         return $form
             ->schema([
 
-                Grid::make()->schema([
+                Card::make()->schema([
 
                     Forms\Components\Hidden::make('uuid'),
 
