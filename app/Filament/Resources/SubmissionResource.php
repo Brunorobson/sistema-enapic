@@ -25,7 +25,7 @@ class SubmissionResource extends Resource
 
     protected static ?string $modelLabel = 'Submissão';
     protected static ?string $pluralModelLabel = 'Submissões';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
@@ -82,6 +82,7 @@ class SubmissionResource extends Resource
                 Forms\Components\Select::make('evaluators')
                     ->multiple()
                     ->label('Avaliadores')
+                    ->placeholder('Selecione um ou mais avaliadores')
                     ->relationship('evaluators', 'name', fn (Builder $query) => $query->select('users.*')
                     ->join('role_user as r', 'r.user_id', 'users.id')
                     ->where('r.role_id', 3))
@@ -99,7 +100,8 @@ class SubmissionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')->searchable(),
-                Tables\Columns\TextColumn::make('event.name')->label('EVENTO')->searchable(),
+                Tables\Columns\TextColumn::make('user.cpf')->label('CPF')->searchable(),
+                //Tables\Columns\TextColumn::make('event.name')->label('EVENTO')->searchable(),
                 Tables\Columns\TextColumn::make('axis.name')->label('EIXO')->searchable()
                 ->formatStateUsing(function (string $state){
                     return substr($state, 0, 6);
@@ -111,9 +113,9 @@ class SubmissionResource extends Resource
                     return Submission::getStatus($state);
                 })
                 ->colors([
-                    'primary',
-                    'Aprovada' => 'draft',
-                    'warning' => 'reviewing']),
+                    'warning' => 'P',
+                    'success' => 'A',
+                    'danger' => 'R']),
 
                 ViewColumn::make('file')->view('components.view-colum-file')->label('ARQUIVO'),
 
@@ -122,11 +124,22 @@ class SubmissionResource extends Resource
                     ->label('CADASTRO'),
             ])
             ->filters([
-
+                SelectFilter::make('axis')
+                ->label('Eixo')
+                ->placeholder("Todos")
+                ->relationship('axis', 'name')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make()->label('Editar'),
+                /*Action::make('visit')
+                ->action(function (Expositor $record, array $data): void {
+                    $record->visits()->create(['expositor_id' => $record->id]);
+                })
+                ->label('Registrar Visita')
+                ->icon('heroicon-s-pencil')
+                ->requiresConfirmation()
+                ->modalSubheading('Tem certeza que disso?')*/
             ])
             ->bulkActions([
                 //Tables\Actions\DeleteBulkAction::make(),

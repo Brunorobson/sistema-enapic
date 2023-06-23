@@ -23,6 +23,7 @@ class InscriptionResource extends Resource
     protected static ?string $model = Inscription::class;
     protected static ?string $modelLabel = 'Inscrição';
     protected static ?string $pluralModelLabel = 'Inscrições';
+    protected static ?int $navigationSort = 1;
 
 
     protected static ?string $navigationIcon = 'heroicon-o-user-add';
@@ -87,7 +88,7 @@ class InscriptionResource extends Resource
                         return Inscription::getStatus($state);
                     })
                     ->colors([
-                        'warning',
+                        'warning' => 'P',
                         'success' => 'A',
                         'danger' => 'C']),
 

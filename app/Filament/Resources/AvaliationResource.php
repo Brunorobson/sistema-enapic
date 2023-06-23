@@ -20,6 +20,7 @@ class AvaliationResource extends Resource
     protected static ?string $model = Avaliation::class;
     protected static ?string $modelLabel = 'Avaliação';
     protected static ?string $pluralModelLabel = 'Avaliações';
+    protected static ?int $navigationSort = 3;
 
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
