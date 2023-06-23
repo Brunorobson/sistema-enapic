@@ -124,6 +124,16 @@ class User extends Authenticatable
         }
     }
 
+    public function hasRole(int $role_id): bool
+    {
+        foreach ($this->roles as $role) {
+            if ($role->id == $role_id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function submissions(): BelongsToMany
     {
         return $this->belongsToMany(Submission::class, 'avaliations', 'user_id', 'submission_id');
@@ -139,8 +149,6 @@ class User extends Authenticatable
     public function associarSubmissao(Submission $submissao)
     {
         $this->submissoes()->attach($submissao->id);
-        //usado para associar uma submissão específica ao usuário atual. Ele recebe como parâmetro uma instância do
-        //modelo Submission e usa o método attach() para associar o ID da submissão com o ID do usuário na tabela intermediária.
     }
 
 

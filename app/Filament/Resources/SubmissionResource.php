@@ -36,6 +36,8 @@ class SubmissionResource extends Resource
 
     public static function form(Form $form): Form
     {
+        /** @var User $user */
+        $user = Auth::user();
         return $form
             ->schema([
 
@@ -76,6 +78,7 @@ class SubmissionResource extends Resource
                 ViewField::make('file_path')
                 ->view('components.view-field-file'),
 
+
                 Forms\Components\Select::make('evaluators')
                     ->multiple()
                     ->label('Avaliadores')
@@ -83,6 +86,7 @@ class SubmissionResource extends Resource
                     ->join('role_user as r', 'r.user_id', 'users.id')
                     ->where('r.role_id', 3))
                     ->preload()
+                    ->hidden($user->hasRole(4))
                     ->columnSpan(6),
 
             ])->columns(6)
@@ -102,10 +106,14 @@ class SubmissionResource extends Resource
                 }),
                 Tables\Columns\TextColumn::make('title')->label('TÍTULO')->searchable(),
 
-                Tables\Columns\TextColumn::make('status')->label('STATUS')
+                Tables\Columns\BadgeColumn::make('status')->label('STATUS')
                 ->formatStateUsing(function (string $state){
                     return Submission::getStatus($state);
-                }),
+                })
+                ->colors([
+                    'primary',
+                    'Aprovada' => 'draft',
+                    'warning' => 'reviewing']),
 
                 ViewColumn::make('file')->view('components.view-colum-file')->label('ARQUIVO'),
 

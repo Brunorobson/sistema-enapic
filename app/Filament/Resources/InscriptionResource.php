@@ -87,9 +87,10 @@ class InscriptionResource extends Resource
                         return Inscription::getStatus($state);
                     })
                     ->colors([
-                        'primary',
-                        'secondary' => 'draft',
-                        'warning' => 'reviewing']),
+                        'warning',
+                        'success' => 'A',
+                        'danger' => 'C']),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->label('CADASTRO'),
