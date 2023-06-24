@@ -139,7 +139,7 @@ return [
         'namespace' => 'App\\Filament\\Widgets',
         'path' => app_path('Filament/Widgets'),
         'register' => [
-            // Widgets\LineChartWidget::class,
+            Widgets\LineChartWidget::class,
         ],
     ],
 

@@ -8,7 +8,9 @@ use App\Models\Avaliation;
 use App\Models\Submission;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\ViewField;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -36,6 +38,7 @@ class AvaliationResource extends Resource
 
     public static function form(Form $form): Form
     {
+
         return $form
             ->schema([
                 Card::make()->schema([
@@ -60,8 +63,15 @@ class AvaliationResource extends Resource
                     ->disabled()
                     ->columnSpan(2),
 
+
+                ViewField::make('id')
+                    ->view('components.view-field-criteria'),
+
+
             ])->columns(10)
-            ]);
+
+        ]);
+
     }
 
     public static function table(Table $table): Table
