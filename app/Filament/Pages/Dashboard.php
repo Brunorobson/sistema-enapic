@@ -22,7 +22,7 @@ class Dashboard extends Page
         /** @var User $user */
 
         $user = Auth::user();
-        if (!($user->isSupport() or $user->isAdmin())) {
+        if (($user->isSupport() or $user->isAdmin())) {
             return [
                 InscriptionChart::class,
                 SubmissionChart::class
@@ -30,7 +30,6 @@ class Dashboard extends Page
         } else {
             return[
                 DashboardOverview::class,
-
             ];
         }
 
