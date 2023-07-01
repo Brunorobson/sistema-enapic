@@ -224,13 +224,13 @@ return [
         'actions' => [
             'modal' => [
                 'actions' => [
-                    'alignment' => 'left',
+                    'alignment' => 'center',
                 ],
             ],
         ],
         'forms' => [
             'actions' => [
-                'alignment' => 'left',
+                'alignment' => 'rigth',
                 'are_sticky' => false,
             ],
             'have_inline_labels' => false,

@@ -15,6 +15,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\ViewField;
+use Filament\Pages\Actions\Modal\Actions\ButtonAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -142,14 +143,6 @@ class SubmissionResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make()->label('Editar'),
-                /*Action::make('visit')
-                ->action(function (Expositor $record, array $data): void {
-                    $record->visits()->create(['expositor_id' => $record->id]);
-                })
-                ->label('Registrar Visita')
-                ->icon('heroicon-s-pencil')
-                ->requiresConfirmation()
-                ->modalSubheading('Tem certeza que disso?')*/
             ])
             ->bulkActions([
                 //Tables\Actions\DeleteBulkAction::make(),
