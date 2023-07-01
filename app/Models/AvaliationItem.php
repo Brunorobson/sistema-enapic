@@ -15,4 +15,9 @@ class AvaliationItem extends Model
     {
         return $this->belongsTo(Avaliation::class);
     }
+
+    public function criteria()
+    {
+        return $this->belongsTo(Criteria::class);
+    }
 }

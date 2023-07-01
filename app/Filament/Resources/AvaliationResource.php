@@ -3,12 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AvaliationResource\Pages;
-use App\Filament\Resources\AvaliationResource\RelationManagers;
+use App\Filament\Resources\AvaliationResource\RelationManagers\ItemsRelationManager;
 use App\Models\Avaliation;
 use App\Models\Submission;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\ViewField;
 use Filament\Resources\Form;
@@ -16,10 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ViewColumn;
-use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class AvaliationResource extends Resource
 {
@@ -64,10 +60,6 @@ class AvaliationResource extends Resource
                     ->columnSpan(2),
 
 
-                ViewField::make('criterias')
-                    ->view('components.view-field-criteria'),
-
-
             ])->columns(10)
 
         ]);
@@ -108,7 +100,7 @@ class AvaliationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ItemsRelationManager::class
         ];
     }
 

@@ -1,12 +1,5 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AvaluatorController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\FileController;
-use App\Http\Controllers\SubmissionsController;
-use App\Http\Livewire\Submissions\Edit;
-use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

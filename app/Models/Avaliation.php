@@ -26,7 +26,7 @@ class Avaliation extends Model
         return $this->belongsTo(Submission::class);
     }
 
-    public function avaliationItems()
+    public function items()
     {
         return $this->hasMany(AvaliationItem::class);
     }
@@ -35,4 +35,26 @@ class Avaliation extends Model
     {
         return $this->belongsToMany(Criteria::class, 'avaliation_items', 'avaliation_id', 'criteria_id');
     }
+
+
+    public function criteriasByAxis()
+    {
+        
+        $selected = AvaliationItem::where('avaliation_id', $this->id)
+        ->get()->pluck('criteria_id')->toArray();
+
+        return Criteria::where('axis_id', $this->submission->axis_id)
+        ->whereNotIn('id', $selected)->get()->pluck('name', 'id')->toArray();
+    }
+
+
+    public function updateTotal(){
+        $sum = AvaliationItem::where('avaliation_id', $this->id)->sum('value');
+
+        $this->total = intVal($sum);
+        $this->save();
+    }
+
+
+
 }
