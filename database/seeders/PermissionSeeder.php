@@ -25,6 +25,12 @@ class PermissionSeeder extends Seeder
             
             ['id' => 7, 'name' => 'Ler Avaliações', 'guard_name' => 'read_avaliantions'],
             ['id' => 8, 'name' => 'Escrever Avaliações', 'guard_name' => 'write_avaliantions'],
+
+            ['id' => 9, 'name' => 'Ler Eventos', 'guard_name' => 'read_events'],
+            ['id' => 10, 'name' => 'Escrever Eventos', 'guard_name' => 'write_events'],
+
+            ['id' => 11, 'name' => 'Ler Critérios', 'guard_name' => 'read_criterias'],
+            ['id' => 12, 'name' => 'Escrever Critérios', 'guard_name' => 'write_criterias'],
         ]);
 
         //permission_role
@@ -37,12 +43,17 @@ class PermissionSeeder extends Seeder
             ['permission_id' => 6, 'role_id' => 2],
             ['permission_id' => 7, 'role_id' => 2],
             ['permission_id' => 8, 'role_id' => 2],
+            ['permission_id' => 9, 'role_id' => 2],
+            ['permission_id' => 10, 'role_id' => 2],
+            ['permission_id' => 11, 'role_id' => 2],
+            ['permission_id' => 12, 'role_id' => 2],
         ]);
 
         //Avaliador = 3
         DB::table('permission_role')->insert([//Ler Submissões
             ['permission_id' => 7, 'role_id' => 3],//Ler Avaliações
             ['permission_id' => 8, 'role_id' => 3],
+            ['permission_id' => 11, 'role_id' => 3],
         ]);
 
         //Pesquisador = 4
