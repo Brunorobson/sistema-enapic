@@ -64,7 +64,7 @@ class AvaliationResource extends Resource
                     ->columnSpan(2),
 
 
-                ViewField::make('id')
+                ViewField::make('criterias')
                     ->view('components.view-field-criteria'),
 
 

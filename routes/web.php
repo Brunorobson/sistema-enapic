@@ -5,7 +5,9 @@ use App\Http\Controllers\AvaluatorController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\SubmissionsController;
+use App\Http\Livewire\Submissions\Edit;
 use App\Models\Submission;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,15 +22,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    if (!Auth::check()) {
+        return view('home');
+    }
+    return redirect('/admin/dashboard');    
 })->name('home');
 
 Route::get('/evento', function () {
-    return view('event');
+    if (!Auth::check()) {
+        return view('event');
+    }
+    return redirect('/admin/dashboard'); 
 })->name('event');
 
 Route::get('/inscricao', function () {
-    return view('auth/register');
+    if (!Auth::check()) {
+        return view('auth/register');
+    }
+    return redirect('/admin/dashboard'); 
 })->name('inscription');
 
 
@@ -41,7 +52,7 @@ Route::middleware([
 ])->group(function () {
 
 
-
+    //Route::get('/admin/submission/edit', Edit::class);
 
 
 });
