@@ -41,17 +41,20 @@ class UserResource extends Resource
                     ->label('NOME')
                     ->required()
                     ->maxLength(255),
+                    
                 Forms\Components\TextInput::make('email')
                     ->label('E-MAIL')
                     ->email()
                     ->required()
                     ->maxLength(255),
+
                 Forms\Components\TextInput::make('password')
                     ->label('SENHA')
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
+
                 Forms\Components\Select::make('roles')
                     ->multiple()
                     ->label('PERFIL')

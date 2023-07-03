@@ -23,10 +23,10 @@ class EditUser extends EditRecord
     }
 
 
-    // protected function mutateFormDataBeforeSave(array $data): array
-    // {
-    //     $data['password'] = bcrypt($data['password']);
+    /*protected function mutateFormDataBeforeSave(array $data): array
+     {
+         $data['password'] = bcrypt($data['password']);
 
-    //     return $data;
-    // }
+        return $data;
+    }*/
 }
