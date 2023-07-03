@@ -97,7 +97,7 @@ class AvaliationResource extends Resource
                 ])
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Avaliar'),
+                Tables\Actions\EditAction::make()->label('Avaliar')->icon('heroicon-o-star'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

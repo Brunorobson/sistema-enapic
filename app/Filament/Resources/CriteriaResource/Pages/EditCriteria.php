@@ -16,4 +16,9 @@ class EditCriteria extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Critério atualizado com sucesso!';
+    }
 }

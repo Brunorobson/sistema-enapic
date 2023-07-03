@@ -15,6 +15,11 @@ class EditEvent extends EditRecord
         return $this->getResource()::getUrl('index');
     }
 
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Evento atualizado com sucesso!';
+    }
+
     protected function getActions(): array
     {
         return [

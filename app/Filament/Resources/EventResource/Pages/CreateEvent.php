@@ -14,4 +14,9 @@ class CreateEvent extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+        {
+            return 'Evento salvo com sucesso!';
+        }
 }

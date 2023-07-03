@@ -17,4 +17,9 @@ class EditAvaliation extends EditRecord
         return $this->getResource()::getUrl('index');
     }
 
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Avaliação atualizada com sucesso!';
+    }
+
 }

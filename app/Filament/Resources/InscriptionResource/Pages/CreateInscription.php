@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateInscription extends CreateRecord
 {
     protected static string $resource = InscriptionResource::class;
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Inscrição salva com sucesso!';
+    }
 }
