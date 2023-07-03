@@ -110,14 +110,17 @@ class SubmissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')->searchable(),
-                Tables\Columns\TextColumn::make('user.cpf')->label('CPF')->searchable(),
+                Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')
+                ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('user.cpf')->label('CPF')
+                ->sortable()->searchable(),
                 //Tables\Columns\TextColumn::make('event.name')->label('EVENTO')->searchable(),
-                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')->searchable()
+                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')
                 ->formatStateUsing(function (string $state){
                     return substr($state, 0, 6);
                 }),
-                Tables\Columns\TextColumn::make('title')->label('TÍTULO')->searchable(),
+                Tables\Columns\TextColumn::make('title')->label('TÍTULO')
+                ->sortable()->searchable(),
 
                 Tables\Columns\BadgeColumn::make('status')->label('STATUS')
                 ->formatStateUsing(function (string $state){
@@ -138,7 +141,15 @@ class SubmissionResource extends Resource
                 SelectFilter::make('axis')
                 ->label('Eixo')
                 ->placeholder("Todos")
-                ->relationship('axis', 'name')
+                ->relationship('axis', 'name'),
+                SelectFilter::make('status')
+                ->label('Status')
+                ->placeholder("Selecione")
+                ->options([
+                    'P' => 'Pendente',
+                    'A' => 'Aprovada',
+                    'R' => 'Reprovada'
+                ])
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

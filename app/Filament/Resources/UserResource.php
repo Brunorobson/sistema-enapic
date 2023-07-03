@@ -66,8 +66,10 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                ->sortable()->searchable()
                 ->label('NOME')                ,
                 Tables\Columns\TextColumn::make('email')
+                ->sortable()->searchable()
                 ->label('E-MAIL'),
                 IconColumn::make('active')->boolean()->label('ATIVO'),
                 Tables\Columns\TextColumn::make('created_at')
@@ -76,7 +78,10 @@ class UserResource extends Resource
             ])
             ->filters([
                 TernaryFilter::make('active')->label('Ativo?'),
-                SelectFilter::make('roles')->label('Filtrar por Perfil')->placeholder('Selecione')
+                SelectFilter::make('roles')
+                ->label('Perfis')
+                ->relationship('roles', 'name')
+                ->label('Filtrar por Perfil')->placeholder('Selecione')
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Editar'),

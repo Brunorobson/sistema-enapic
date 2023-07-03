@@ -88,6 +88,8 @@ class AvaliationResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('submission.status')
+                ->label('Status')
+                ->placeholder("Selecione")
                 ->options([
                     'P' => 'Pendente',
                     'A' => 'Aprovada',

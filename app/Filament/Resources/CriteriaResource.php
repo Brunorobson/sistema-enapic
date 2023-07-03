@@ -46,11 +46,12 @@ class CriteriaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')->searchable()
+                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')
                 ->formatStateUsing(function (string $state){
                     return substr($state, 0, 6);
                 }),
                 Tables\Columns\TextColumn::make('name')
+                    ->sortable()->searchable()
                     ->label('NOME'),
                 Tables\Columns\IconColumn::make('active')
                     ->boolean()
@@ -61,6 +62,7 @@ class CriteriaResource extends Resource
                 ->label('Critério')
                 ->placeholder("Todos")
                 ->relationship('axis', 'name'),
+                
                 SelectFilter::make('active')
                 ->options([
                     '1' => 'Ativa',

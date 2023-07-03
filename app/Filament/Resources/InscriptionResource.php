@@ -76,10 +76,10 @@ class InscriptionResource extends Resource
                 //Tables\Columns\TextColumn::make('uuid'),
                 Tables\Columns\TextColumn::make('user.name')
                 ->label('PARTICIPANTE')
-                ->searchable(),
+                ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('user.cpf')
                 ->label('CPF')
-                ->searchable(),
+                ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('event.name')
                 ->label('EVENTO'),
                 Tables\Columns\BadgeColumn::make('status')
@@ -99,14 +99,14 @@ class InscriptionResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('status')
+                ->label('Status')
+                ->placeholder("Selecione")
                 ->options([
                     'P' => 'Pendente',
                     'A' => 'Ativa',
                     'C' => 'Cancelada'
                 ])
-                ->label('Pesquisar por Status')
-                ->placeholder('Selecione')
-                    ])
+            ])
             ->actions([
                 //Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make()->label('Editar'),
