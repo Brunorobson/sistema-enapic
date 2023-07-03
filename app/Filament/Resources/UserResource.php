@@ -11,7 +11,9 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
@@ -66,13 +68,15 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                 ->label('NOME')                ,
                 Tables\Columns\TextColumn::make('email')
-                ->label('E-MAIL')                ,
+                ->label('E-MAIL'),
+                IconColumn::make('active')->boolean()->label('ATIVO'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y')
                     ->label('CADASTRO'),
             ])
             ->filters([
-                SelectFilter::make('name')->label('Pesquisar por Usúario')->placeholder('Selecione')
+                TernaryFilter::make('active')->label('Ativo?'),
+                SelectFilter::make('roles')->label('Filtrar por Perfil')->placeholder('Selecione')
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Editar'),
