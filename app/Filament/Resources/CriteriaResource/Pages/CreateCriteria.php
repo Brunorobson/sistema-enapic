@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCriteria extends CreateRecord
 {
     protected static string $resource = CriteriaResource::class;
+    protected static ?string $title = 'Críterios de Avaliação';
 
     protected function getRedirectUrl(): string
     {

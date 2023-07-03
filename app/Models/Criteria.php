@@ -19,7 +19,7 @@ class Criteria extends Model
 
     public function axis()
     {
-        return $this->belongsTo(Axe::class);
+        return $this->belongsTo(Axis::class);
     }
 
     public function avaliations(): BelongsToMany
