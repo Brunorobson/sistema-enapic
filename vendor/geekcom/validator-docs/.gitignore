@@ -1,0 +1,10 @@
+/vendor
+composer.phar
+.DS_Store
+.idea/
+/build
+*.cache
+docker-compose.yml
+.phpcs-cache
+.phpunit.result.cache
+phpunit.xml
