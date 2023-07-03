@@ -50,8 +50,10 @@ class CriteriaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('axis_id')
-                    ->label('EIXO'),
+                Tables\Columns\TextColumn::make('axis.name')->label('EIXO')->searchable()
+                ->formatStateUsing(function (string $state){
+                    return substr($state, 0, 6);
+                }),
                 Tables\Columns\TextColumn::make('name')
                     ->label('NOME'),
                 Tables\Columns\IconColumn::make('active')
@@ -68,14 +70,14 @@ class CriteriaResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -83,5 +85,5 @@ class CriteriaResource extends Resource
             'create' => Pages\CreateCriteria::route('/create'),
             'edit' => Pages\EditCriteria::route('/{record}/edit'),
         ];
-    }    
+    }
 }
