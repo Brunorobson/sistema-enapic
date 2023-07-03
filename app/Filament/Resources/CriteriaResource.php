@@ -19,7 +19,7 @@ class CriteriaResource extends Resource
     protected static ?string $model = Criteria::class;
 
     protected static ?string $modelLabel = 'Critério';
-    protected static ?string $pluralModelLabel = 'Critérios';
+    protected static ?string $pluralModelLabel = 'Critérios de Avaliação';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?int $navigationSort = 1;
@@ -62,7 +62,7 @@ class CriteriaResource extends Resource
                 ->label('Critério')
                 ->placeholder("Todos")
                 ->relationship('axis', 'name'),
-                
+
                 SelectFilter::make('active')
                 ->options([
                     '1' => 'Ativa',
