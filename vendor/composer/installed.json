@@ -1839,6 +1839,7 @@
             "install-path": "../fruitcake/php-cors"
         },
         {
+<<<<<<< HEAD
             "name": "geekcom/validator-docs",
             "version": "3.9.0",
             "version_normalized": "3.9.0.0",
@@ -1903,6 +1904,8 @@
             "install-path": "../geekcom/validator-docs"
         },
         {
+=======
+>>>>>>> 7d9d19386c44777a794befaa8cdff6ce7a88d4ef
             "name": "graham-campbell/result-type",
             "version": "v1.1.1",
             "version_normalized": "1.1.1.0",
@@ -2584,6 +2587,7 @@
             "install-path": "../jenssegers/agent"
         },
         {
+<<<<<<< HEAD
             "name": "laravel-lang/attributes",
             "version": "v2.2.0",
             "version_normalized": "2.2.0.0",
@@ -2743,6 +2747,8 @@
             "install-path": "../laravel-lang/lang"
         },
         {
+=======
+>>>>>>> 7d9d19386c44777a794befaa8cdff6ce7a88d4ef
             "name": "laravel/fortify",
             "version": "v1.17.3",
             "version_normalized": "1.17.3.0",
@@ -10311,6 +10317,7 @@
             "install-path": "../theseer/tokenizer"
         },
         {
+<<<<<<< HEAD
             "name": "thiagocfn/inscricaoestadual",
             "version": "1.1.2",
             "version_normalized": "1.1.2.0",
@@ -10359,6 +10366,8 @@
             "install-path": "../thiagocfn/inscricaoestadual"
         },
         {
+=======
+>>>>>>> 7d9d19386c44777a794befaa8cdff6ce7a88d4ef
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.6",
             "version_normalized": "2.2.6.0",
@@ -10649,8 +10658,11 @@
         "fakerphp/faker",
         "filp/whoops",
         "hamcrest/hamcrest-php",
+<<<<<<< HEAD
         "laravel-lang/attributes",
         "laravel-lang/lang",
+=======
+>>>>>>> 7d9d19386c44777a794befaa8cdff6ce7a88d4ef
         "laravel/pint",
         "laravel/sail",
         "mockery/mockery",
