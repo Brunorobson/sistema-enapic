@@ -9,11 +9,12 @@ use Filament\Resources\Pages\ListRecords;
 class ListCriterias extends ListRecords
 {
     protected static string $resource = CriteriaResource::class;
+    protected static ?string $title = 'Critérios de Avaliação';
 
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Novo Critério'),
         ];
     }
 }

@@ -15,7 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ViewColumn;
-
+use Filament\Tables\Filters\SelectFilter;
 
 class AvaliationResource extends Resource
 {
@@ -87,7 +87,12 @@ class AvaliationResource extends Resource
 
             ])
             ->filters([
-                //
+                SelectFilter::make('submission.status')
+                ->options([
+                    'P' => 'Pendente',
+                    'A' => 'Aprovada',
+                    'R' => 'Reprovada'
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Avaliar'),
