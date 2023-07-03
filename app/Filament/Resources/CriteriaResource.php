@@ -61,10 +61,10 @@ class CriteriaResource extends Resource
                 ->label('Critério')
                 ->placeholder("Todos")
                 ->relationship('axis', 'name'),
-                SelectFilter::make('status')
+                SelectFilter::make('active')
                 ->options([
-                    '0' => 'Desativada',
                     '1' => 'Ativa',
+                    '0' => 'Desativada',
                 ])
                 ->label('Pesquisar por Status')
                 ->placeholder('Selecione')
