@@ -27,7 +27,7 @@ class EventResource extends Resource
     protected static ?string $navigationGroup = 'Administração';
     protected static ?string $modelLabel = 'Evento';
     protected static ?string $pluralModelLabel = 'Eventos';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
