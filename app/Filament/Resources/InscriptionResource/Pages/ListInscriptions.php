@@ -5,6 +5,7 @@ namespace App\Filament\Resources\InscriptionResource\Pages;
 use App\Filament\Resources\InscriptionResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Facades\Auth;
 
 class ListInscriptions extends ListRecords
 {

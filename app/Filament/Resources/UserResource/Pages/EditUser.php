@@ -17,10 +17,16 @@ class EditUser extends EditRecord
         ];
     }
 
-    protected function mutateFormDataBeforeSave(array $data): array
+    protected function getRedirectUrl(): string
     {
-        $data['password'] = bcrypt($data['password']);
-    
-        return $data;
+        return $this->getResource()::getUrl('index');
     }
+
+
+    // protected function mutateFormDataBeforeSave(array $data): array
+    // {
+    //     $data['password'] = bcrypt($data['password']);
+
+    //     return $data;
+    // }
 }

@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -23,11 +24,6 @@ class CriteriaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?int $navigationSort = 1;
     protected static ?string $navigationGroup = 'Administração';
-
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
 
     public static function form(Form $form): Form
     {
@@ -61,8 +57,18 @@ class CriteriaResource extends Resource
                     ->label('STATUS'),
             ])
             ->filters([
-                //
-            ])
+                SelectFilter::make('axis')
+                ->label('Critério')
+                ->placeholder("Todos")
+                ->relationship('axis', 'name'),
+                SelectFilter::make('active')
+                ->options([
+                    '1' => 'Ativa',
+                    '0' => 'Desativada',
+                ])
+                ->label('Pesquisar por Status')
+                ->placeholder('Selecione')
+                    ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
