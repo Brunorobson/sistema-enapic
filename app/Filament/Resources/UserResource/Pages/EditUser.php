@@ -22,6 +22,11 @@ class EditUser extends EditRecord
         return $this->getResource()::getUrl('index');
     }
 
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Usuário atualizado com sucesso!';
+    }
+
 
     /*protected function mutateFormDataBeforeSave(array $data): array
      {

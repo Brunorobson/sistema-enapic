@@ -22,7 +22,7 @@ class CreateSubmission extends CreateRecord
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Artigo submetido com sucesso!';
+        return 'Trabalho submetido com sucesso!';
     }
 
 }

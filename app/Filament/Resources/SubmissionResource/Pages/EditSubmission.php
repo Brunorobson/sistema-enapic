@@ -26,7 +26,7 @@ class EditSubmission extends EditRecord
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Submissão atualizada com sucesso!';
+        return 'Trabalho atualizado com sucesso!';
     }
 
 
