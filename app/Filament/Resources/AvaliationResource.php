@@ -50,7 +50,7 @@ class AvaliationResource extends Resource
                     ->required()
                     ->disabled()
                     ->relationship('submission', 'title')
-                    ->label('Submissão')
+                    ->label('Título do Trabalho')
                     ->columnSpan(5),
 
                 Forms\Components\TextInput::make('total')
@@ -100,7 +100,7 @@ class AvaliationResource extends Resource
                 Tables\Actions\EditAction::make()->label('Avaliar')->icon('heroicon-o-star'),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

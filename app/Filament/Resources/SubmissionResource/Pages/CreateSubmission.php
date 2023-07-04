@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateSubmission extends CreateRecord
 {
     protected static string $resource = SubmissionResource::class;
+    protected static ?string $title = 'Submissão de Trabalho';
 
     protected function mutateFormDataBeforeCreate(array $data): array{
         $data['user_id'] = auth()->id();

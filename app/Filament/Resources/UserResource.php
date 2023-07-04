@@ -32,6 +32,7 @@ class UserResource extends Resource
     {
         return static::getModel()::count();
     }
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -57,8 +58,8 @@ class UserResource extends Resource
 
                 Forms\Components\Select::make('roles')
                     ->multiple()
+                    ->relationship('roles', 'name')
                     ->label('PERFIL')
-                    ->relationship('roles', titleColumnName: 'name')
                     ->preload()
                 ])->columns(2)
             ]);
