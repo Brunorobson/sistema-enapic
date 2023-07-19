@@ -34,8 +34,8 @@ class Inscription extends Model
 
     public static function getStatus($state){
         $array = array(
-            'P' => 'Pendente',
-            'A' => 'Ativa',
+            'P' => 'Pendente de Pagamento',
+            'I' => 'Inscrito',
             'C' => 'Cancelada'
         );
         return $array[$state];

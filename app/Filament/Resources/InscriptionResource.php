@@ -59,8 +59,8 @@ class InscriptionResource extends Resource
                         ->required()
                         ->placeholder('Selecione')
                         ->options([
-                            'P' => 'Pendente',
-                            'A' => 'Ativa',
+                            'P' => 'Pendente de Pagamento',
+                            'I' => 'Inscrito',
                             'C' => 'Cancelada'
                         ]),
 
@@ -89,7 +89,7 @@ class InscriptionResource extends Resource
                     })
                     ->colors([
                         'warning' => 'P',
-                        'success' => 'A',
+                        'success' => 'I',
                         'danger' => 'C']),
 
                 Tables\Columns\TextColumn::make('created_at')
@@ -102,8 +102,8 @@ class InscriptionResource extends Resource
                 ->label('Status')
                 ->placeholder("Selecione")
                 ->options([
-                    'P' => 'Pendente',
-                    'A' => 'Ativa',
+                    'P' => 'Pendente de Pagamento',
+                    'I' => 'Inscrito',
                     'C' => 'Cancelada'
                 ])
             ])

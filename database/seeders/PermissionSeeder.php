@@ -22,7 +22,7 @@ class PermissionSeeder extends Seeder
 
             ['id' => 5, 'name' => 'Ler Submissões', 'guard_name' => 'read_submissions'],
             ['id' => 6, 'name' => 'Escrever Submissões', 'guard_name' => 'write_submissions'],
-            
+
             ['id' => 7, 'name' => 'Ler Avaliações', 'guard_name' => 'read_avaliantions'],
             ['id' => 8, 'name' => 'Escrever Avaliações', 'guard_name' => 'write_avaliantions'],
 
@@ -56,18 +56,22 @@ class PermissionSeeder extends Seeder
             ['permission_id' => 11, 'role_id' => 3],
         ]);
 
-        //Pesquisador = 4
+        //Comisssão = 4
+
+
+
+        //Participante = 5
         DB::table('permission_role')->insert([
-            ['permission_id' => 3, 'role_id' => 4], //Ler Inscrições
-            ['permission_id' => 4, 'role_id' => 4],
-            ['permission_id' => 5, 'role_id' => 4], //Ler Submissões
-            ['permission_id' => 6, 'role_id' => 4],
+            ['permission_id' => 3, 'role_id' => 5], //Ler Inscrições
+            ['permission_id' => 4, 'role_id' => 5],
+            ['permission_id' => 5, 'role_id' => 5], //Ler Submissões
+            ['permission_id' => 6, 'role_id' => 5],
         ]);
 
-        //Ouvinte = 5
+        //Pré-inscrito = 5
         DB::table('permission_role')->insert([
-            ['permission_id' => 3, 'role_id' => 5],  //Ler Inscrições
-            ['permission_id' => 4, 'role_id' => 5]
+            ['permission_id' => 3, 'role_id' => 6],  //Ler Inscrições
+            ['permission_id' => 4, 'role_id' => 6]
         ]);
 
     }
