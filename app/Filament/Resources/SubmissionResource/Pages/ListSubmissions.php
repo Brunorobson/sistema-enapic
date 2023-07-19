@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListSubmissions extends ListRecords
 {
     protected static string $resource = SubmissionResource::class;
+    protected static ?string $title = 'Submissões de Trabalhos';
 
     protected function getActions(): array
     {

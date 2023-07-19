@@ -31,10 +31,10 @@ class SubmissionResource extends Resource
     protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
+    
     protected static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return static::getModel()::count();        
     }
 
     public static function form(Form $form): Form
@@ -47,7 +47,7 @@ class SubmissionResource extends Resource
                 Card::make()->schema([
                 Forms\Components\Select::make('event_id')
                     ->label('Evento')
-                    ->default(1)
+                    ->disablePlaceholderSelection()
                     ->required()
                     ->placeholder('Selecione')
                     ->relationship('event', 'name')
@@ -82,7 +82,7 @@ class SubmissionResource extends Resource
                 ->view('components.view-field-file'),
 
 
-                Forms\Components\Select::make('evaluators')
+                Select::make('evaluators')
                     ->multiple()
                     ->label('Avaliadores')
                     ->placeholder('Selecione um ou mais avaliadores')
@@ -94,7 +94,7 @@ class SubmissionResource extends Resource
                     ->columnSpan(5),
 
                 Select::make('status')
-                    ->placeholder('Selecione')
+                    ->disablePlaceholderSelection()
                     ->hidden(!($user->hasRole(1) or $user->hasRole(2)))
                     ->options([
                         'P' => 'Pendente',

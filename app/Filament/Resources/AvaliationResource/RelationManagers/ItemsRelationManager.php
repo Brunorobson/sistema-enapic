@@ -42,6 +42,7 @@ class ItemsRelationManager extends RelationManager
 
                 Radio::make('value')
                     ->required()
+                    ->label('Nota')
                     ->inline()
                     ->options([
                         '0' => '0 - Péssimo',
@@ -59,25 +60,35 @@ class ItemsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('criteria.name'),
-                Tables\Columns\TextColumn::make('value'),
+                Tables\Columns\TextColumn::make('criteria.name')->label("CRITÉRIO"),
+                Tables\Columns\TextColumn::make('value')->label("NOTA"),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                ->label("Fazer Avaliação")
                 ->successNotificationTitle('Critério avaliado com sucesso!')
                 ->after(function (CreateAction $action, RelationManager $livewire) {
                     $livewire->ownerRecord->updateTotal();
                 }),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                ->successNotificationTitle('Critério reavaliado com sucesso!')
+                ->after(function (RelationManager $livewire) {
+                    $livewire->ownerRecord->updateTotal();
+                }),
+                Tables\Actions\DeleteAction::make()
+                ->successNotificationTitle('Critério excluido com sucesso!')
+                ->after(function (RelationManager $livewire) {
+                    $livewire->ownerRecord->updateTotal();
+                }),
             ])
             ->bulkActions([
                 //Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    } 
+    
 }

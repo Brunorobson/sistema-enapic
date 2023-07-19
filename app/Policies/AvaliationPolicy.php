@@ -45,7 +45,8 @@ class AvaliationPolicy
      */
     public function delete(User $user, Avaliation $avaliation): bool
     {
-        return $user->hasPermissionTo('write_avaliantions');
+        //return $user->hasPermissionTo('write_avaliantions');
+        return false;
     }
 
     /**
@@ -61,6 +62,7 @@ class AvaliationPolicy
      */
     public function forceDelete(User $user, Avaliation $avaliation): bool
     {
-        return $user->hasPermissionTo('write_avaliantions');
+        //return $user->hasPermissionTo('write_avaliantions');
+        return false;
     }
 }
