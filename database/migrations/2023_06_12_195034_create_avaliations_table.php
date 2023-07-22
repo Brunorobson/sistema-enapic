@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(model:User::class);
             $table->foreignIdFor(model:Submission::class);
             $table->integer('total')->default(0);
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

@@ -22,8 +22,11 @@ return new class extends Migration
             $table->foreignIdFor(Axis::class);
             $table->string('title');
             $table->text('resume');
-            $table->char('status')->default('P'); //'Pendente', 'Aprovada', 'Reprovada'
+            //AA - Aguardando Avaliação, EA - Em Avaliação, AV - Avaliado, 
+            //AP - Aprovado, AC - Aprovado com Correções, RE - Reprovado
+            $table->char('status', 2)->default('AA'); 
             $table->string('file');
+            $table->string('file_new');
             $table->timestamps();
         });
     }
