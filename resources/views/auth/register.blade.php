@@ -18,6 +18,52 @@
                                 <p class="font-light text-xs">Preencha todos os campos obrigatórios. (*)</p>
                             </div>
 
+                            <div class="mt-4 grid grid-cols-4 gap-4">
+                                <x-label for="name" value="{{ __('Qual a sua Instituição?') }}" />
+
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="type" value="UB" id="unibalsasCheckbox" checked>
+                                    <span class="ml-2">Unibalsas</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="type" value="PE" id="otherCheckbox">
+                                    <span class="ml-2">Outra?</span>
+                                </label>
+
+                                <div id="institutionField" class="mt-4 col-span-2" style="display: none;">
+                                    <label for="institution" class="block">Instituição</label>
+                                    <input id="institution" class="block mt-1 w-full" type="text" name="institution" :value="old('institution')" autocomplete="institution" />
+                                </div>
+                            </div>
+
+                            <script>
+                                const unibalsasCheckbox = document.getElementById('unibalsasCheckbox');
+                                const otherCheckbox = document.getElementById('otherCheckbox');
+                                const institutionField = document.getElementById('institutionField');
+
+                                // Exibir o campo de instituição quando o checkbox "Outra?" estiver selecionado
+                                otherCheckbox.addEventListener('change', function () {
+                                    institutionField.style.display = otherCheckbox.checked ? 'block' : 'none';
+                                });
+
+                                // Garantir que apenas um dos checkboxes pode ser selecionado
+                                unibalsasCheckbox.addEventListener('change', function () {
+                                    if (unibalsasCheckbox.checked) {
+                                        otherCheckbox.checked = false;
+                                        institutionField.style.display = 'none';
+                                    }
+                                });
+
+                                otherCheckbox.addEventListener('change', function () {
+                                    if (otherCheckbox.checked) {
+                                        unibalsasCheckbox.checked = false;
+                                        institutionField.style.display = 'block';
+                                    }
+                                });
+                            </script>
+
+
+
                             <div class="mt-4">
                                 <x-label for="name" value="{{ __('Nome') }}" />
                                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
