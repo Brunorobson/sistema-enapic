@@ -61,9 +61,12 @@ class Submission extends Model
 
     public static function getStatus($state){
         $array = array(
-            'P' => 'Pendente',
-            'A' => 'Aprovada',
-            'R' => 'Reprovada'
+            'AA' => 'Aguardando Avaliação',
+            'EA' => 'Em Avaliação',
+            'AV' => 'Avaliado',
+            'AP' => 'Aprovado',
+            'AC' => 'Aprovado com Correções',
+            'RE' => 'Reprovado'
         );
         return $array[$state];
     }

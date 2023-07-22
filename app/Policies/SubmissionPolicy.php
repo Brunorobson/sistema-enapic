@@ -38,7 +38,7 @@ class SubmissionPolicy
      */
     public function update(User $user, Submission $submission): bool
     {
-        if ($submission->status != 'P') {
+        if ($submission->status != 'AA') {
             return false;
         }
 

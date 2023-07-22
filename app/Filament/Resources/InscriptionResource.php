@@ -59,7 +59,7 @@ class InscriptionResource extends Resource
                         ->required()
                         ->placeholder('Selecione')
                         ->options([
-                            'P' => 'Pendente de Pagamento',
+                            'P' => 'Pagamento Pendente',
                             'I' => 'Inscrito',
                             'C' => 'Cancelada'
                         ]),
@@ -73,7 +73,8 @@ class InscriptionResource extends Resource
     {
         return $table
             ->columns([
-                //Tables\Columns\TextColumn::make('uuid'),
+                Tables\Columns\TextColumn::make('id')
+                ->label('ID')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
                 ->label('PARTICIPANTE')
                 ->sortable()->searchable(),
@@ -102,7 +103,7 @@ class InscriptionResource extends Resource
                 ->label('Status')
                 ->placeholder("Selecione")
                 ->options([
-                    'P' => 'Pendente de Pagamento',
+                    'P' => 'Pagamento Pendente',
                     'I' => 'Inscrito',
                     'C' => 'Cancelada'
                 ])

@@ -32,10 +32,10 @@ class EditInscription extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $user = User::find($data['user_id']);
-        if($data['status'] == 'A'){
-            $user->setRole(4); //Pesquisador
+        if($data['status'] == 'I'){
+            $user->setRole(5); //Participante
         }else{
-            $user->setRole(5); //Ouvinte
+            $user->setRole(6); //Pré-inscrito
         }
     
         return $data;

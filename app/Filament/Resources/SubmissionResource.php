@@ -47,7 +47,7 @@ class SubmissionResource extends Resource
                 Card::make()->schema([
                 Forms\Components\Select::make('event_id')
                     ->label('Evento')
-                    ->disablePlaceholderSelection()
+                    //->disablePlaceholderSelection()
                     ->required()
                     ->placeholder('Selecione')
                     ->relationship('event', 'name')
@@ -110,6 +110,9 @@ class SubmissionResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                ->label('ID')->sortable()->searchable(),
+                
                 Tables\Columns\TextColumn::make('user.name')->label('PARTICIPANTE')
                 ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('user.cpf')->label('CPF')

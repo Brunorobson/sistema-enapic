@@ -18,7 +18,8 @@ class SubmissionScope implements Scope
 
         $user = Auth::user();
         if (!($user->isSupport() or $user->isAdmin())) {
-            if(!$user->hasRole(3)){
+            //Role 4 avaliador, filtrar as submissões atribuidas a ele.
+            if(!$user->hasRole(4)){
                 $builder->where('user_id', $user->id);
             }
         }
