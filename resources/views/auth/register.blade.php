@@ -22,19 +22,20 @@
                                 <x-label for="name" value="{{ __('Qual a sua Instituição?') }}" />
 
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="type" value="UB" id="unibalsasCheckbox" checked>
+                                    <x-input id="unibalsasCheckbox" value="UB" type="checkbox" name="type" checked autofocus autocomplete="type" />
                                     <span class="ml-2">Unibalsas</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="type" value="PE" id="otherCheckbox">
+                                    <x-input id="otherCheckbox" value="PE" type="checkbox" name="type" autofocus autocomplete="type" />
                                     <span class="ml-2">Outra?</span>
                                 </label>
-
-                                <div id="institutionField" class="mt-4 col-span-2" style="display: none;">
-                                    <label for="institution" class="block">Instituição</label>
-                                    <input id="institution" class="block mt-1 w-full" type="text" name="institution" :value="old('institution')" autocomplete="institution" />
-                                </div>
                             </div>
+
+                                <div id="institutionField" class="mt-4" style="display: none;">
+                                    <x-label for="institution" value="{{ __('Instituição') }}" />
+                                    <x-input id="institution" class="block mt-1 w-full" type="text" name="institution" :value="old('institution')" autocomplete="institution" />
+                                </div>
+                            
 
                             <script>
                                 const unibalsasCheckbox = document.getElementById('unibalsasCheckbox');
