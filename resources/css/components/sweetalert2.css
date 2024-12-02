@@ -1,0 +1,23 @@
+body.swal2-height-auto {
+    @apply !h-screen;
+}
+
+.swal2-backdrop-show {
+    @apply absolute inset-0 !bg-slate-900/60 backdrop-blur transition-opacity duration-100;
+}
+
+.swal2-popup {
+    @apply dark:bg-gray-800 dark:text-navy-100 text-slate-600;
+}
+
+.swal2-confirm {
+    @apply !bg-primary !border-primary-focus ring-primary-focus;
+}
+
+.swal2-deny {
+    @apply !bg-error;
+}
+
+.swal2-cancel {
+    @apply !bg-slate-150 dark:bg-navy-500 !text-slate-800 dark:text-navy-50;
+}

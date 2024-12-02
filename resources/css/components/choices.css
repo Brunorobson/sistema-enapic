@@ -1,0 +1,45 @@
+/* @import "choices.js/public/assets/styles/base.min.css"; */
+@import "choices.js/public/assets/styles/choices.min.css";
+
+.choices {
+    @apply leading-5;
+}
+
+.choices__inner {
+    @apply flex items-center rounded-lg border border-slate-300 outline-none transition duration-300 ease-in-out hover:border-slate-400 dark:border-navy-450 dark:hover:border-navy-400 disabled:pointer-events-none disabled:select-none disabled:border-none dark:bg-navy-700 bg-white dark:text-navy-100 disabled:bg-zinc-100;
+}
+
+.is-open .choices__inner {
+    @apply rounded-t-lg rounded-b-none;
+}
+
+.is-flipped.is-open .choices__inner {
+    @apply rounded-b-lg rounded-t-none;
+}
+
+.choices__input {
+    @apply bg-transparent border-none !ring-0 !outline-none;
+}
+
+.choices__list--multiple .choices__item {
+    @apply border-slate-300 dark:border-navy-400 border rounded-md bg-slate-150 text-navy-700 dark:bg-slate-600 dark:text-slate-100;
+}
+
+.choices__list {
+    @apply bg-white dark:bg-navy-700 z-2;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted,
+.choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
+    @apply bg-primary text-slate-50;
+}
+
+.choices__list--dropdown,
+.choices__list[aria-expanded] {
+    @apply z-50;
+}
+
+.choices[data-type*=select-multiple] .choices__button,
+.choices[data-type*=text] .choices__button {
+    @apply border-none rounded-sm py-0.5 px-2 mx-1 bg-navy-700;
+}
